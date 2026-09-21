@@ -306,7 +306,7 @@
     }
     .stats-bar span b { color: var(--accent-color); }
 
-    /* --- BANNER MAINTENANCE (BISA DITUTUP) --- */
+    /* --- BANNER MAINTENANCE --- */
     .maintenance-banner {
       width: 100%;
       background: rgba(239, 68, 68, 0.1);
@@ -400,31 +400,9 @@
     }
     .disclaimer-box b { color: var(--accent-color); }
 
-    /* KUTIPAN TOKO */
-    .quote-box {
-      margin-top: 22px;
-      text-align: center;
-      width: 100%;
-      padding: 0 10px;
-    }
-    .quote-title {
-      color: var(--accent-color);
-      font-weight: 800;
-      font-size: 13px;
-      letter-spacing: 2px;
-      margin-bottom: 4px;
-    }
-    .quote-text {
-      color: #94a3b8;
-      font-size: 12px;
-      line-height: 1.6;
-      font-style: italic;
-      margin-bottom: 10px;
-    }
-    .quote-line { color: var(--accent-color); letter-spacing: -2px; opacity: 0.4; }
-    .copyright { margin-top: 20px; font-size: 12px; color: #6e7681; font-weight: 600; letter-spacing: 1px; }
+    .copyright { margin-top: 25px; font-size: 12px; color: #6e7681; font-weight: 600; letter-spacing: 1px; text-align: center; width: 100%; }
 
-    /* --- TOMBOL SHARE & BACK TO TOP ---. */
+    /* --- TOMBOL SHARE & BACK TO TOP --- */
     .share-web-btn {
       margin-top: 15px;
       background: transparent;
@@ -512,7 +490,7 @@
     .toast-desc { color: var(--text-color); font-size: 11.5px; font-weight: 600; opacity: 0.9; }
     .toast-time { color: #64748b; font-size: 10px; margin-top: 2px; }
 
-    /* --- MODAL DRAWER (DIKUNCI RAPI DI HP/DESKTOP) --- */
+    /* --- MODAL DRAWER --- */
     .drawer-overlay {
       display: none;
       position: fixed;
@@ -728,7 +706,7 @@
       </div>
     </div>
 
-    <!-- PENGUMUMAN MAINTENANCE (BISA DITUTUP) -->
+    <!-- PENGUMUMAN MAINTENANCE -->
     <div class="maintenance-banner" id="maintenance-box">
       <span>⚠️</span>
       <div><b>Info Store:</b> Antrean normal (1-15 min). Mohon sabar ya min!</div>
@@ -764,6 +742,11 @@
         <span class="arrow-icon">&#10095;</span>
       </button>
 
+      <button class="action-btn" onclick="vibratePhone(); bukaAbout()">
+        <span class="btn-label">ℹ️ ABOUT REGARM-MART</span>
+        <span class="arrow-icon">&#10095;</span>
+      </button>
+
       <a class="action-btn" href="https://t.me/jejakbeli" target="_blank" onclick="vibratePhone()">
         <span class="btn-label">📢 TESTIMONI</span>
         <span class="arrow-icon">&#10095;</span>
@@ -782,12 +765,6 @@
 
     <div class="disclaimer-box">
       ⚠️ <b>Informasi:</b> Website ini merupakan <b>Katalog Pintar</b> untuk mempermudah pelanggan mengecek harga dan detail paket favorit, <b>bukan</b> sistem auto-order otomatis. Seluruh proses pembayaran dan transaksi tetap dilakukan dengan aman melalui WhatsApp Admin.
-    </div>
-
-    <div class="quote-box">
-      <div class="quote-title">"REGARM-MART"</div>
-      <div class="quote-text">this is an outlet owned by @ZAY so buyers ask for your attitude, if your attitude is good, our attitude is also very good. please be wise when shopping.</div>
-      <div class="quote-line">──────────────────</div>
     </div>
 
     <footer class="copyright">
@@ -938,6 +915,21 @@
         <button onclick="lanjutKeWA()" class="submit-btn" style="width: 100%; display: flex; justify-content: center; gap: 10px;">
           <span>🟢</span> KONFIRMASI & LANJUT WA
         </button>
+      </div>
+
+      <!-- VIEW ABOUT -->
+      <div id="view-about" class="view-panel" style="display: none;">
+        <div class="drawer-header">
+          <h3>ℹ️ ABOUT REGARM-MART</h3>
+          <button class="nav-btn" onclick="tutupSemua()">&times;</button>
+        </div>
+        <div class="snk-box">
+          <div class="snk-title">✦ REGARM-MART OUTLET</div>
+          <div class="snk-text">
+            <p style="margin-bottom: 12px; font-style: italic; color: var(--accent-color);">this is an outlet owned by @ZAY so buyers ask for your attitude, if your attitude is good, our attitude is also very good. please be wise when shopping.</p>
+            <p>REGARM-MART adalah pusat layanan aplikasi premium terpercaya sejak 2023 yang berfokus memberikan kemudahan akses hiburan dan alat penunjang produktivitas dengan harga bersahabat dan garansi penuh.</p>
+          </div>
+        </div>
       </div>
 
       <!-- VIEW CONTACT -->
@@ -1365,6 +1357,7 @@
     function tutupLuar(e) { if (e.target.id === "drawer-modal") tutupSemua(); }
     
     function bukaKontak() { vibratePhone(); document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-contact"); }
+    function bukaAbout() { vibratePhone(); document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-about"); }
     function bukaFaq() { vibratePhone(); document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-faq"); }
     function bukaSnK() { vibratePhone(); document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-snk"); }
     
