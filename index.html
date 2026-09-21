@@ -945,17 +945,20 @@
 
     // --- LOGIKA JAM KERJA OTOMATIS (10.00 - 00.30 WIB) ---
     function checkJamOperasional() {
-      const now = new Date();
-      // Konversi ke zona WIB (UTC+7)
-      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-      const wibDate = new Date(utc + (3600000 * 7));
+      // Ambil waktu WIB resmi
+      const wibStr = new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta" });
+      const wibDate = new Date(wibStr);
       
       const jam = wibDate.getHours();
       const menit = wibDate.getMinutes();
-      const totalMenit = (jam * 60) + menit;
 
-      // 10.00 = 600 menit | 00.30 = 30 menit
-      const isBuka = (totalMenit >= 600 || totalMenit <= 30);
+      // Buka jika: jam 10.00 - 23.59 ATAU jam 00.00 - 00.30
+      let isBuka = false;
+      if (jam >= 10 && jam <= 23) {
+        isBuka = true;
+      } else if (jam === 0 && menit <= 30) {
+        isBuka = true;
+      }
 
       const headerDot = document.getElementById("header-status-dot");
       const badgeIcon = document.getElementById("badge-status-icon");
@@ -978,7 +981,7 @@
       }
     }
     checkJamOperasional();
-    setInterval(checkJamOperasional, 60000); // Periksa setiap menit
+    setInterval(checkJamOperasional, 30000);
 
     // --- POPUP NOTIFIKASI SALES (FOMO) ---
     const toastKota = ["Jakarta", "Surabaya", "Bandung", "Medan", "Makassar", "Bali", "Semarang", "Yogyakarta"];
