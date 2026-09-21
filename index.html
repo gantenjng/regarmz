@@ -310,10 +310,38 @@
     }
     .stats-bar span b { color: var(--accent-color); }
 
+    /* SEARCH BAR DI HOME */
+    .home-search {
+      width: 100%;
+      margin-top: 18px;
+      position: relative;
+    }
+    .home-search input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-color);
+      padding: 14px 18px 14px 45px;
+      border-radius: 14px;
+      font-size: 14px;
+      outline: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      backdrop-filter: blur(8px);
+    }
+    .home-search input:focus { border-color: var(--accent-color); }
+    .home-search span {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      opacity: 0.6;
+    }
+
     /* --- TEKS PROMO BERJALAN --- */
     .promo-marquee {
       width: 100%;
-      margin-top: 22px;
+      margin-top: 20px;
       overflow: hidden;
       background: rgba(226, 201, 169, 0.05);
       border-top: 1px solid var(--card-border);
@@ -341,7 +369,7 @@
       display: flex;
       flex-direction: column;
       gap: 13px;
-      margin-top: 22px;
+      margin-top: 20px;
     }
     .action-btn {
       width: 100%;
@@ -575,23 +603,44 @@
       margin-left: 8px; vertical-align: middle; letter-spacing: 1px;
     }
 
-    /* PENCARIAN & KATEGORI */
-    .search-box { margin-bottom: 18px; }
+    /* PENCARIAN & KATEGORI & SORTING */
+    .search-box { margin-bottom: 15px; }
     .search-box input {
       width: 100%; background: var(--input-bg); border: 1px solid var(--card-border);
       color: var(--text-color); padding: 15px 18px; border-radius: 12px; font-size: 14.5px; outline: none; transition: 0.3s;
     }
     .search-box input:focus { border-color: var(--accent-color); box-shadow: 0 0 10px rgba(226, 201, 169, 0.2); }
-    .category-chips { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; }
-    .category-chips::-webkit-scrollbar { height: 5px; }
+    
+    .filter-tools {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .category-chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; flex: 1; }
+    .category-chips::-webkit-scrollbar { height: 4px; }
     .category-chips::-webkit-scrollbar-thumb { background: rgba(48, 54, 61, 0.5); border-radius: 10px; }
     .chip {
       background: var(--input-bg); border: 1px solid var(--card-border); color: #94a3b8;
-      padding: 9px 18px; border-radius: 30px; font-size: 12.5px; font-weight: 700; cursor: pointer;
+      padding: 8px 16px; border-radius: 30px; font-size: 12px; font-weight: 700; cursor: pointer;
       white-space: nowrap; transition: 0.2s; letter-spacing: 0.5px;
     }
     .chip:hover { border-color: var(--accent-color); color: var(--accent-color); }
     .chip.active { background: var(--accent-color); color: #0d1117; border-color: var(--accent-color); }
+
+    .sort-select {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-color);
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      outline: none;
+      cursor: pointer;
+    }
 
     /* PRODUK LIST */
     .product-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
@@ -667,10 +716,10 @@
 </head>
 <body>
 
-  <!-- TOGGLE MODE TERANG / GELAP -->
+  <!-- TOGGLE MODE -->
   <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Ganti Mode Tampilan">🌙</button>
 
-  <!-- LOADING SPLASH SCREEN -->
+  <!-- SPLASH SCREEN -->
   <div id="splash-screen">
     <img class="splash-logo" src="ava.png" alt="Loading" onerror="this.style.display='none'">
     <div class="splash-text">REGARM-MART</div>
@@ -709,6 +758,12 @@
         <span>⚡ <b>Instant</b> Proses</span>
         <span>🛡️ <b>Garansi</b> 100%</span>
       </div>
+
+      <!-- SEARCH BAR LANGSUNG DI HALAMAN UTAMA -->
+      <div class="home-search">
+        <span>🔍</span>
+        <input type="text" id="home-search-input" placeholder="Cari aplikasi instan di sini..." oninput="bukaKatalogDariHome(this.value)">
+      </div>
     </div>
 
     <!-- Teks Promo Berjalan -->
@@ -720,27 +775,32 @@
 
     <!-- Menu Utama -->
     <div class="menu-group">
-      <button class="action-btn" onclick="bukaKatalogUtama()">
+      <button class="action-btn" onclick="vibratePhone(); bukaKatalogUtama()">
         <span class="btn-label">✦ KATALOG APLIKASI PREMIUM</span>
         <span class="arrow-icon">&#10095;</span>
       </button>
 
-      <button class="action-btn" onclick="bukaKontak()">
+      <button class="action-btn" onclick="vibratePhone(); bukaFavoritSaya()">
+        <span class="btn-label">🐺 APLIKASI FAVORIT SAYA</span>
+        <span class="arrow-icon">&#10095;</span>
+      </button>
+
+      <button class="action-btn" onclick="vibratePhone(); bukaKontak()">
         <span class="btn-label">💬 CONTACT PERSON</span>
         <span class="arrow-icon">&#10095;</span>
       </button>
 
-      <button class="action-btn" onclick="bukaFaq()">
+      <button class="action-btn" onclick="vibratePhone(); bukaFaq()">
         <span class="btn-label">❓ FAQ / TANYA JAWAB</span>
         <span class="arrow-icon">&#10095;</span>
       </button>
 
-      <a class="action-btn" href="https://t.me/jejakbeli" target="_blank">
+      <a class="action-btn" href="https://t.me/jejakbeli" target="_blank" onclick="vibratePhone()">
         <span class="btn-label">📢 TESTIMONI</span>
         <span class="arrow-icon">&#10095;</span>
       </a>
 
-      <button class="action-btn" onclick="bukaSnK()">
+      <button class="action-btn" onclick="vibratePhone(); bukaSnK()">
         <span class="btn-label">🛡️ KETENTUAN ORDER & KLAIM GARANSI</span>
         <span class="arrow-icon">&#10095;</span>
       </button>
@@ -766,7 +826,7 @@
     </footer>
   </div>
 
-  <!-- TOMBOL WHATSAPP MELAYANG -->
+  <!-- TOMBOL WA MELAYANG -->
   <a href="https://wa.me/62895325627342?text=Halo%20Admin,%20saya%20mau%20tanya%20layanan" target="_blank" class="float-wa" title="Hubungi WhatsApp Admin">
     <svg viewBox="0 0 24 24">
       <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
@@ -780,7 +840,7 @@
       <!-- VIEW 1: KATALOG UTAMA -->
       <div id="view-pricelist-utama" class="view-panel">
         <div class="drawer-header">
-          <h3>✦ PREMIUM APPS PRICELIST</h3>
+          <h3 id="katalog-title">✦ PREMIUM APPS PRICELIST</h3>
           <button class="nav-btn" onclick="tutupSemua()">&times;</button>
         </div>
 
@@ -788,18 +848,25 @@
           <input type="text" id="search-app" placeholder="Cari aplikasi premium favoritmu..." oninput="filterAplikasi()">
         </div>
 
-        <div class="category-chips">
-          <button class="chip active" onclick="setKategori('Semua', this)">SEMUA</button>
-          <button class="chip" onclick="setKategori('Streaming & Music', this)">STREAMING & MUSIC</button>
-          <button class="chip" onclick="setKategori('Editing', this)">EDITING</button>
-          <button class="chip" onclick="setKategori('Education', this)">EDUCATION</button>
-          <button class="chip" onclick="setKategori('Other', this)">OTHER</button>
+        <div class="filter-tools">
+          <div class="category-chips">
+            <button class="chip active" onclick="setKategori('Semua', this)">SEMUA</button>
+            <button class="chip" onclick="setKategori('Streaming & Music', this)">STREAMING</button>
+            <button class="chip" onclick="setKategori('Editing', this)">EDITING</button>
+            <button class="chip" onclick="setKategori('Education', this)">EDUCATION</button>
+            <button class="chip" onclick="setKategori('Other', this)">OTHER</button>
+          </div>
+          <select class="sort-select" id="sort-select-app" onchange="filterAplikasi()">
+            <option value="default">Urutkan</option>
+            <option value="hot">🔥 Hot Deals</option>
+            <option value="az">🔤 Nama (A-Z)</option>
+          </select>
         </div>
 
         <div class="product-list" id="box-all-apps"></div>
       </div>
 
-      <!-- VIEW 2: PILIHAN PAKET -->
+      <!-- VIEW 2: PILIHAN PAKET DENGAN SORTING HARGA & DURASI -->
       <div id="view-paket" class="view-panel" style="display: none;">
         <div class="drawer-header">
           <button class="nav-btn" onclick="gantiView('view-pricelist-utama')">&#10094;</button>
@@ -807,14 +874,20 @@
           <button class="nav-btn" onclick="tutupSemua()">&times;</button>
         </div>
         
-        <div style="display: flex; justify-content: center; margin-top: -10px; margin-bottom: 20px;">
+        <div class="filter-tools" style="margin-bottom: 15px;">
           <button class="chip" onclick="bukaInfoAplikasi()" style="border-color: var(--accent-color); color: var(--accent-color); background: rgba(226, 201, 169, 0.1);">
-            ℹ️ Info & Penjelasan Aplikasi
+            ℹ️ Info Aplikasi
           </button>
+          <select class="sort-select" id="sort-select-paket" onchange="renderDaftarPaket()">
+            <option value="default">Urutkan Paket</option>
+            <option value="termurah">💵 Harga Termurah</option>
+            <option value="termahal">💎 Harga Termahal</option>
+            <option value="terlama">⏳ Durasi Terlama</option>
+          </select>
         </div>
 
-        <div style="font-size: 13.5px; color: var(--text-color); opacity: 0.9; background: rgba(226, 201, 169, 0.08); border: 1px dashed var(--card-border); padding: 14px 18px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px;">
-          🐺 <b>Tips Favorit:</b> Klik ikon serigala untuk menandai aplikasi andalan kamu sebelum order!
+        <div style="font-size: 13px; color: var(--text-color); opacity: 0.9; background: rgba(226, 201, 169, 0.08); border: 1px dashed var(--card-border); padding: 12px 16px; border-radius: 12px; margin-bottom: 15px;">
+          🐺 Klik ikon serigala untuk menyimpan ke <b>Favorit Saya</b> secara permanen!
         </div>
 
         <div class="product-list" id="daftar-paket-box"></div>
@@ -830,7 +903,7 @@
 
         <form class="order-form" onsubmit="bukaNotaDigital(event)">
           <div class="info-note" id="form-note">
-            ⚡ <b>Estimasi Pengerjaan:</b> 1 – 15 menit (no rush order). Konfirmasi jenis akun (Seller/Buyer) bisa dibicarakan di WhatsApp ya.
+            ⚡ <b>Estimasi Pengerjaan:</b> 1 – 15 menit (no rush order). Konfirmasi jenis akun bisa dibicarakan di WhatsApp.
           </div>
 
           <div class="form-box">
@@ -864,7 +937,7 @@
         </form>
       </div>
 
-      <!-- VIEW NOTA (DENGAN QUICK COPY) -->
+      <!-- VIEW NOTA -->
       <div id="view-nota" class="view-panel" style="display: none;">
         <div class="drawer-header">
           <button class="nav-btn" onclick="gantiView('view-form')">&#10094;</button>
@@ -895,7 +968,7 @@
         </button>
       </div>
 
-      <!-- VIEW 4: CONTACT PERSON -->
+      <!-- VIEW CONTACT -->
       <div id="view-contact" class="view-panel" style="display: none;">
         <div class="drawer-header">
           <h3>💬 HUBUNGI ADMIN</h3>
@@ -942,7 +1015,7 @@
         </div>
       </div>
 
-      <!-- VIEW 5: S&K -->
+      <!-- VIEW S&K -->
       <div id="view-snk" class="view-panel" style="display: none;">
         <div class="drawer-header">
           <h3>🛡️ KETENTUAN & KLAIM GARANSI</h3>
@@ -990,7 +1063,7 @@
         </div>
       </div>
 
-      <!-- VIEW 6: INFO APLIKASI -->
+      <!-- VIEW INFO APLIKASI -->
       <div id="view-app-info" class="view-panel" style="display: none;">
         <div class="drawer-header">
           <button class="nav-btn" onclick="gantiView('view-paket')">&#10094;</button>
@@ -1008,8 +1081,16 @@
   </div>
 
   <script>
+    // --- HAPTIC FEEDBACK / GETAR HALUS ---
+    function vibratePhone() {
+      if (navigator.vibrate) {
+        navigator.vibrate(15);
+      }
+    }
+
     // --- DARK / LIGHT MODE TOGGLE ---
     function toggleTheme() {
+      vibratePhone();
       const html = document.documentElement;
       const btn = document.getElementById("theme-btn");
       if (html.getAttribute("data-theme") === "light") {
@@ -1022,7 +1103,6 @@
         localStorage.setItem("theme", "light");
       }
     }
-    // Load saved theme
     if (localStorage.getItem("theme") === "light") {
       document.documentElement.setAttribute("data-theme", "light");
       document.getElementById("theme-btn").innerText = "☀️";
@@ -1030,18 +1110,50 @@
 
     // --- QUICK COPY & SHARE API ---
     function salinInfoBayar() {
+      vibratePhone();
       const textToCopy = `Order ID: ${document.getElementById("nota-id").innerText}\nProduk: ${pApp} - ${pNamaPaket}\nHarga: ${pHarga}\nMetode Bayar: ${document.getElementById("nota-pay").innerText}`;
       navigator.clipboard.writeText(textToCopy).then(() => { alert("Detail nota berhasil disalin ke clipboard!"); });
     }
     function salinNoWA() {
+      vibratePhone();
       navigator.clipboard.writeText("0895325627342").then(() => { alert("Nomor WhatsApp berhasil disalin!"); });
     }
     function bagikanToko() {
+      vibratePhone();
       if (navigator.share) {
         navigator.share({ title: 'REGARM-MART', text: 'Pusat aplikasi premium bergaransi & terpercaya!', url: window.location.href }).catch(() => {});
       } else {
         navigator.clipboard.writeText(window.location.href).then(() => { alert("Link toko berhasil disalin!"); });
       }
+    }
+
+    // --- WISHLIST PERMANEN (LOCALSTORAGE) ---
+    function getWishlist() {
+      try {
+        return JSON.parse(localStorage.getItem("regarm_wishlist")) || [];
+      } catch(e) {
+        return [];
+      }
+    }
+    function toggleFav(event, appName, paketStr) {
+      event.stopPropagation();
+      vibratePhone();
+      let wishlist = getWishlist();
+      const itemKey = appName + "___" + paketStr;
+      const index = wishlist.indexOf(itemKey);
+
+      if (index > -1) {
+        wishlist.splice(index, 1);
+        event.currentTarget.classList.remove("active");
+      } else {
+        wishlist.push(itemKey);
+        event.currentTarget.classList.add("active");
+      }
+      localStorage.setItem("regarm_wishlist", JSON.stringify(wishlist));
+    }
+    function isFavorited(appName, paketStr) {
+      let wishlist = getWishlist();
+      return wishlist.includes(appName + "___" + paketStr);
     }
 
     // --- SPLASH SCREEN ---
@@ -1152,10 +1264,6 @@
       setInterval(showRandomToast, 15000);
     }, 3000);
 
-    function toggleFav(event, element) {
-      event.stopPropagation(); element.classList.toggle("active");
-    }
-
     const NO_WA = "62895325627342";
     let linkWaFinal = "";
     let timeStrFinal = "";
@@ -1167,17 +1275,20 @@
     };
 
     function bukaInfoAplikasi() {
+      vibratePhone();
       document.getElementById("title-app-info").innerText = "INFO " + pApp.toUpperCase();
       document.getElementById("desc-app-info").innerText = APP_INFO[pApp] || APP_INFO["DEFAULT"];
       gantiView("view-app-info");
     }
 
     function salinFormatGaransi() {
+      vibratePhone();
       const formatText = `☆ ✪ FORMAT KLAIM GARANSI ✪\nミ Nama aplikasi :\nミ Email:\nミ Password:\nミ ‌Plan:\nミ Profil + pin:\nミ Problem/masalah:\nミ ‌Tanggal order:\nミ Durasi order:\nミ Sisa hari:`;
       navigator.clipboard.writeText(formatText).then(() => { alert("Format Klaim Garansi berhasil disalin!"); });
     }
 
     function tanyaAdminWA() {
+      vibratePhone();
       const formatPesan = `Halo Admin REGARM-MART, saya mau tanya-tanya dulu nih soal produk:\n\n• *${pItem}*\n\n(Tulis pertanyaanmu di sini...)`;
       const linkWa = `https://wa.me/${NO_WA}?text=${encodeURIComponent(formatPesan)}`;
       window.open(linkWa, "_blank");
@@ -1254,41 +1365,152 @@
 
     let pKategoriApp = "", pApp = "", pItem = "", pNamaPaket = "", pHarga = "";
     let activeFilterKat = "Semua";
+    let isModeFavorit = false;
 
     function gantiView(viewId) { document.querySelectorAll(".view-panel").forEach(v => v.style.display = "none"); document.getElementById(viewId).style.display = "block"; }
     function tutupSemua() { document.getElementById("drawer-modal").style.display = "none"; }
     function tutupLuar(e) { if (e.target.id === "drawer-modal") tutupSemua(); }
-    function bukaKontak() { document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-contact"); }
-    function bukaFaq() { document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-faq"); }
-    function bukaSnK() { document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-snk"); }
-    function bukaKatalogUtama() { document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-pricelist-utama"); renderAplikasi(""); }
+    
+    function bukaKontak() { vibratePhone(); document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-contact"); }
+    function bukaFaq() { vibratePhone(); document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-faq"); }
+    function bukaSnK() { vibratePhone(); document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-snk"); }
+    
+    function bukaKatalogUtama() { 
+      vibratePhone(); 
+      isModeFavorit = false;
+      document.getElementById("katalog-title").innerText = "✦ PREMIUM APPS PRICELIST";
+      document.getElementById("drawer-modal").style.display = "flex"; 
+      gantiView("view-pricelist-utama"); 
+      renderAplikasi(""); 
+    }
+
+    function bukaKatalogDariHome(queryText) {
+      if(queryText.trim().length > 0) {
+        isModeFavorit = false;
+        document.getElementById("katalog-title").innerText = "✦ PENCARIAN APLIKASI";
+        document.getElementById("drawer-modal").style.display = "flex";
+        document.getElementById("search-app").value = queryText;
+        gantiView("view-pricelist-utama");
+        renderAplikasi(queryText);
+      }
+    }
+
+    function bukaFavoritSaya() {
+      isModeFavorit = true;
+      document.getElementById("katalog-title").innerText = "🐺 APLIKASI FAVORIT SAYA";
+      document.getElementById("drawer-modal").style.display = "flex";
+      gantiView("view-pricelist-utama");
+      renderAplikasi("");
+    }
 
     function setKategori(kat, btn) {
-      activeFilterKat = kat; document.querySelectorAll(".chip").forEach(c => c.classList.remove("active")); btn.classList.add("active"); renderAplikasi(document.getElementById("search-app").value);
+      vibratePhone();
+      isModeFavorit = false;
+      activeFilterKat = kat; 
+      document.querySelectorAll(".chip").forEach(c => c.classList.remove("active")); 
+      btn.classList.add("active"); 
+      renderAplikasi(document.getElementById("search-app").value);
     }
     function filterAplikasi() { renderAplikasi(document.getElementById("search-app").value); }
 
     function renderAplikasi(queryText) {
-      const box = document.getElementById("box-all-apps"); box.innerHTML = ""; const query = queryText.toLowerCase();
+      const box = document.getElementById("box-all-apps"); 
+      box.innerHTML = ""; 
+      const query = queryText.toLowerCase();
+      const sortVal = document.getElementById("sort-select-app").value;
+      
+      let matchedApps = [];
+
       for (const [katName, apps] of Object.entries(DATABASE)) {
-        if (activeFilterKat !== "Semua" && activeFilterKat !== katName) continue;
-        for (const appName of Object.keys(apps)) {
+        if (!isModeFavorit && activeFilterKat !== "Semua" && activeFilterKat !== katName) continue;
+        for (const [appName, pakets] of Object.entries(apps)) {
+          
+          // Jika mode favorit, cek apakah aplikasi ini punya paket yang di-wishlist
+          if (isModeFavorit) {
+            let hasFav = pakets.some(pkt => isFavorited(appName, pkt.split(" - ")[0].replace("[HOT]", "").trim()));
+            if (!hasFav) continue;
+          }
+
           if (appName.toLowerCase().includes(query)) {
-            const row = document.createElement("div"); row.className = "product-item";
-            row.innerHTML = `<div class="item-left"><img class="app-logo" src="${getLogoUrl(appName)}" onerror="this.src='https://api.dicebear.com/7.x/identicon/svg?seed=${appName}'"><span style="font-size: 15px;">${appName}</span></div><span class="arrow-icon">&#10095;</span>`;
-            row.onclick = () => { pKategoriApp = katName; pilihPaket(appName); }; box.appendChild(row);
+            let isHotApp = pakets.some(p => p.includes("[HOT]"));
+            matchedApps.push({ kat: katName, name: appName, hot: isHotApp });
           }
         }
       }
+
+      // Sorting
+      if (sortVal === "hot") {
+        matchedApps.sort((a, b) => b.hot - a.hot);
+      } else if (sortVal === "az") {
+        matchedApps.sort((a, b) => a.name.localeCompare(b.name));
+      }
+
+      if(matchedApps.length === 0) {
+        box.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 30px; color:#94a3b8;">Tidak ada aplikasi ditemukan.</div>`;
+        return;
+      }
+
+      matchedApps.forEach(item => {
+        const row = document.createElement("div"); 
+        row.className = "product-item";
+        row.innerHTML = `<div class="item-left"><img class="app-logo" src="${getLogoUrl(item.name)}" onerror="this.src='https://api.dicebear.com/7.x/identicon/svg?seed=${item.name}'"><span style="font-size: 15px;">${item.name} ${item.hot ? '<span class="hot-label">🔥 HOT</span>' : ''}</span></div><span class="arrow-icon">&#10095;</span>`;
+        row.onclick = () => { vibratePhone(); pKategoriApp = item.kat; pilihPaket(item.name); }; 
+        box.appendChild(row);
+      });
     }
 
+    let currentAppPakets = [];
     function pilihPaket(appName) {
-      pApp = appName; document.getElementById("label-aplikasi").innerText = appName.toUpperCase();
-      const box = document.getElementById("daftar-paket-box"); box.innerHTML = "";
+      pApp = appName; 
+      document.getElementById("label-aplikasi").innerText = appName.toUpperCase();
       
-      const pakets = DATABASE[pKategoriApp][appName] || [];
+      // Ambil kategori asli app
+      for(let k in DATABASE) {
+        if(DATABASE[k][appName]) { pKategoriApp = k; break; }
+      }
+      currentAppPakets = DATABASE[pKategoriApp][appName] || [];
+      renderDaftarPaket();
+      gantiView("view-paket");
+    }
 
-      pakets.forEach((pktStr) => {
+    // Helper konversi harga string ke angka untuk sorting
+    function parseHarga(strHarga) {
+      let clean = strHarga.replace(/[^0-9]/g, "");
+      return parseInt(clean) || 0;
+    }
+    // Helper konversi durasi ke bobot hari untuk sorting durasi terlama
+    function parseDurasi(strNamaPaket) {
+      let lower = strNamaPaket.toLowerCase();
+      if(lower.includes("lifetime") || lower.includes("edu")) return 99999;
+      if(lower.includes("tahun")) return 365;
+      if(lower.includes("bulan")) {
+        let match = lower.match(/([0-9]+)\s*bulan/);
+        return match ? parseInt(match[1]) * 30 : 30;
+      }
+      if(lower.includes("hari")) {
+        let match = lower.match(/([0-9]+)\s*hari/);
+        return match ? parseInt(match[1]) : 1;
+      }
+      if(lower.includes("jam")) return 0.1;
+      return 1;
+    }
+
+    function renderDaftarPaket() {
+      const box = document.getElementById("daftar-paket-box"); 
+      box.innerHTML = "";
+      const sortVal = document.getElementById("sort-select-paket").value;
+
+      let listData = [...currentAppPakets];
+
+      if(sortVal === "termurah") {
+        listData.sort((a, b) => parseHarga(a.split(" - ")[1] || "0") - parseHarga(b.split(" - ")[1] || "0"));
+      } else if(sortVal === "termahal") {
+        listData.sort((a, b) => parseHarga(b.split(" - ")[1] || "0") - parseHarga(a.split(" - ")[1] || "0"));
+      } else if(sortVal === "terlama") {
+        listData.sort((a, b) => parseDurasi(b) - parseDurasi(a));
+      }
+
+      listData.forEach((pktStr) => {
         const parts = pktStr.split(" - ");
         let namaAsli = parts[0];
         let harga = parts.length > 1 ? parts[1] : "";
@@ -1299,11 +1521,14 @@
           namaAsli = namaAsli.replace("[HOT]", "").trim();
         }
 
-        const row = document.createElement("div"); row.className = "product-item";
-        row.innerHTML = `<div class="item-left"><span class="fav-icon" onclick="toggleFav(event, this)" title="Tandai Favorit">🐺</span><span>${namaAsli} ${showHot ? '<span class="hot-label">🔥 BEST</span>' : ''}</span></div><span class="prod-price">${harga}</span>`;
-        row.onclick = () => siapkanForm(appName, namaAsli, harga); box.appendChild(row);
+        let isFav = isFavorited(pApp, namaAsli);
+
+        const row = document.createElement("div"); 
+        row.className = "product-item";
+        row.innerHTML = `<div class="item-left"><span class="fav-icon ${isFav ? 'active' : ''}" onclick="toggleFav(event, '${pApp}', '${namaAsli}')" title="Tandai Favorit">🐺</span><span>${namaAsli} ${showHot ? '<span class="hot-label">🔥 BEST</span>' : ''}</span></div><span class="prod-price">${harga}</span>`;
+        row.onclick = () => { vibratePhone(); siapkanForm(pApp, namaAsli, harga); }; 
+        box.appendChild(row);
       });
-      gantiView("view-paket");
     }
 
     function siapkanForm(appName, namaPaket, harga) {
@@ -1316,6 +1541,7 @@
 
     function bukaNotaDigital(e) {
       e.preventDefault();
+      vibratePhone();
       const waCust = document.getElementById("input-wa-cust").value;
       const pay = document.getElementById("input-pay").value;
       
@@ -1346,7 +1572,10 @@
       gantiView("view-nota");
     }
 
-    function lanjutKeWA() { if (linkWaFinal !== "") { window.open(linkWaFinal, "_blank"); } }
+    function lanjutKeWA() { 
+      vibratePhone();
+      if (linkWaFinal !== "") { window.open(linkWaFinal, "_blank"); } 
+    }
   </script>
 </body>
 </html>
