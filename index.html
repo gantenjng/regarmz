@@ -162,6 +162,11 @@
       display: block;
     }
     .status-dot {
+      /* Status Tutup (Merah) */
+    .status-dot.closed {
+      background-color: #ef4444 !important;
+      box-shadow: 0 0 10px #ef4444 !important;
+    }
       position: absolute;
       bottom: 8px;
       right: 12px;
@@ -604,6 +609,12 @@
       <div class="store-title">REGARM-MART <span class="verified-icon">✦</span></div>
       <div class="store-subtitle">PREMIUM APPS</div>
       <p class="store-bio">"Providing cheap, trusted, and fully guaranteed premium apps since 2023 ⚡"</p>
+      
+      <!-- Indikator Buka / Tutup Otomatis -->
+      <div id="store-status-badge" style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 13px; font-weight: 700; padding: 6px 16px; border-radius: 20px; background: rgba(18, 23, 31, 0.8); border: 1px solid rgba(226, 201, 169, 0.25);">
+        <span id="status-icon">🟢</span>
+        <span id="status-text" style="color: #e2e8f0;">Memeriksa status toko...</span>
+      </div>
       
       <div class="stats-bar">
         <span>⭐ <b>4.9/5.0</b> Rating</span>
@@ -1141,6 +1152,46 @@
     }
 
     function lanjutKeWA() { if (linkWaFinal !== "") { window.open(linkWaFinal, "_blank"); } }
+    // --- CEK JAM BUKA OTOMATIS (10.00 - 00.30 WIB) ---
+    function updateJamOperasional() {
+      const now = new Date();
+      
+      // Ambil waktu WIB
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const wibDate = new Date(utc + (3600000 * 7));
+      
+      const jam = wibDate.getHours();
+      const menit = wibDate.getMinutes();
+      const totalMenit = (jam * 60) + menit;
+
+      // Jam buka: 10.00 (600 menit) sampai 00.30 malam (30 menit hari berikutnya)
+      // Artinya buka jika totalMenit >= 600 (jam 10.00 ke atas) ATAU totalMenit <= 30 (jam 00.00 - 00.30)
+      const isBuka = (totalMenit >= 600 || totalMenit <= 30);
+
+      const dot = document.querySelector(".status-dot");
+      const badgeIcon = document.getElementById("status-icon");
+      const badgeText = document.getElementById("status-text");
+
+      if (isBuka) {
+        if (dot) dot.classList.remove("closed");
+        if (badgeIcon) badgeIcon.innerText = "🟢";
+        if (badgeText) {
+          badgeText.innerText = "Sedang Buka (10.00 – 00.30 WIB)";
+          badgeText.style.color = "#10b981";
+        }
+      } else {
+        if (dot) dot.classList.add("closed");
+        if (badgeIcon) badgeIcon.innerText = "🔴";
+        if (badgeText) {
+          badgeText.innerText = "Sedang Tutup (Buka kembali 10.00 WIB)";
+          badgeText.style.color = "#ef4444";
+        }
+      }
+    }
+
+    // Jalankan saat web dibuka dan perbarui tiap 1 menit
+    updateJamOperasional();
+    setInterval(updateJamOperasional, 60000);
   </script>
 </body>
 </html>
