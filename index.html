@@ -631,7 +631,7 @@
       </div>
       <div class="store-title">REGARM-MART <span class="verified-icon">✦</span></div>
       <div class="store-subtitle">PREMIUM APPS</div>
-      <p class="store-bio">"Providing cheap, trusted, and fully guaranteed premium apps since 2023 ⚡"</p>
+      <p class="store-bio">"your one-stop premium store. tap menu di bawah untuk order"</p>
       
       <!-- BADGE STATUS OPERASIONAL MANDIRI (ESTETIK & SIMETRIS) -->
       <div class="store-badge">
@@ -649,7 +649,7 @@
     <!-- Teks Promo Berjalan -->
     <div class="promo-marquee">
       <span class="marquee-text">
-        ✦ NANTIKAN PENAWARAN EKSKLUSIF REGARM-MART ✧ QUALITY GUARANTEED ✦ STAY TUNED FOR MORE UPDATES ✧ PROSES CEPAT AMAN ✦
+        ✦ NANTI ADA PROMO/DISKON KALAU RAMAI ✧ JANGAN RAGU BUAT BELI ✦ TRUSTED SINCE 2023 WITH 300+ PROOF ✧ ADA HARGA ADA KUALITAS ✦ STAY TUNE FOR MORE INFO ✧
       </span>
     </div>
 
@@ -671,7 +671,7 @@
       </a>
 
       <button class="action-btn" onclick="bukaSnK()">
-        <span class="btn-label">🛡️ KETENTUAN & KLAIM GARANSI</span>
+        <span class="btn-label">🛡️ KETENTUAN ORDER & KLAIM GARANSI</span>
         <span class="arrow-icon">&#10095;</span>
       </button>
     </div>
@@ -681,7 +681,7 @@
     </div>
 
     <div class="quote-box">
-      <div class="quote-title">"REGARM-MART" : ──</div>
+      <div class="quote-title">"REGARM-MART"</div>
       <div class="quote-text">this is an outlet owned by @ZAY so buyers ask for your attitude, if your attitude is good, our attitude is also very good. please be wise when shopping.</div>
       <div class="quote-line">──────────────────</div>
     </div>
@@ -753,7 +753,7 @@
 
         <form class="order-form" onsubmit="bukaNotaDigital(event)">
           <div class="info-note" id="form-note">
-            <b>Informasi Akun:</b> Konfirmasi jenis akun (Seller/Buyer) bisa dibicarakan di obrolan WhatsApp.
+            <b>Informasi Akun:</b> Konfirmasi jenis akun (Seller/Buyer) bisa dibicarakan di WhatsApp ya.
           </div>
 
           <div class="form-box">
@@ -783,7 +783,7 @@
           </div>
 
           <button type="submit" class="submit-btn" style="width: 100%;">TAMPILKAN NOTA PESANAN</button>
-          <button type="button" class="ask-btn" onclick="tanyaAdminWA()">💬 MASIH BINGUNG? TANYA ADMIN DULU</button>
+          <button type="button" class="ask-btn" onclick="tanyaAdminWA()">💬 MASIH BINGUNG? TANYA ADMIN DULU YUK</button>
         </form>
       </div>
 
@@ -825,11 +825,11 @@
         </div>
         <div class="content-list">
           <a class="action-btn" href="https://wa.me/62895325627342?text=Halo%20Admin,%20saya%20mau%20tanya%20layanan" target="_blank" style="background: rgba(8, 11, 16, 0.5);">
-            <span class="btn-label" style="font-size: 16px;">🟢 WhatsApp Admin Utama</span>
+            <span class="btn-label" style="font-size: 16px;">📱 WhatsApp Admin Utama</span>
             <span class="arrow-icon">&#10095;</span>
           </a>
           <a class="action-btn" href="https://x.com/klebuss" target="_blank" style="background: rgba(8, 11, 16, 0.5);">
-            <span class="btn-label" style="font-size: 16px;">𝕏 Akun X (Twitter) @klebuss</span>
+            <span class="btn-label" style="font-size: 16px;">𝕏 Akun X (Twitter)</span>
             <span class="arrow-icon">&#10095;</span>
           </a>
         </div>
@@ -974,14 +974,14 @@
         if (headerDot) headerDot.classList.remove("closed");
         if (badgeIcon) badgeIcon.innerText = "🟢";
         if (badgeText) {
-          badgeText.innerText = "Sedang Buka (10.00 – 00.30 WIB)";
+          badgeText.innerText = "Store sudah buka (10.00 – 00.30 WIB)";
           badgeText.style.color = "#10b981";
         }
       } else {
         if (headerDot) headerDot.classList.add("closed");
         if (badgeIcon) badgeIcon.innerText = "🔴";
         if (badgeText) {
-          badgeText.innerText = "Sedang Tutup (Buka 10.00 WIB)";
+          badgeText.innerText = "Store sudah tutup (Buka 10.00 WIB)";
           badgeText.style.color = "#ef4444";
         }
       }
@@ -990,8 +990,8 @@
     setInterval(checkJamOperasional, 30000);
 
     // --- POPUP NOTIFIKASI SALES (FOMO) ---
-    const toastKota = ["Jakarta", "Surabaya", "Bandung", "Medan", "Makassar", "Bali", "Semarang", "Yogyakarta"];
-    const toastProduk = ["Netflix 1 Bulan", "Spotify Famplan", "Canva 1 Tahun", "YouTube Premium", "Capcut Private", "Viu 1 Tahun", "ChatGPT Plus"];
+    const toastKota = ["Jakarta", "Surabaya", "Bandung", "Medan", "Makassar", "Bali", "Semarang", "Yogyakarta", "Kalimantan", "Sumatera", "Sulawesi". "Bekasi", "Depok", "Nusa Tenggara Timur", "Papua", "Lombok", "Inggris", "Spanyol", "Malaysia", "Singapore"];
+    const toastProduk = ["Netflix 1 Bulan", "Spotify Famplan", "Canva 1 Tahun", "Netflix 7 Hari", "Canva 5 Hari", "Zoom 3 Bulan", "Claude 7 Hari", "YouTube Premium", "Capcut Private", "Viu 1 Tahun", "ChatGPT Plus"];
     
     function showRandomToast() {
       const toast = document.getElementById("sales-toast");
@@ -1001,7 +1001,7 @@
       const randomProduk = toastProduk[Math.floor(Math.random() * toastProduk.length)];
       const randomMenit = Math.floor(Math.random() * 5 + 1);
 
-      document.getElementById("toast-buyer").innerText = "Seseorang di " + randomKota;
+      document.getElementById("toast-buyer").innerText = "Customer dari " + randomKota;
       document.getElementById("toast-product").innerText = "Baru saja order " + randomProduk;
       document.getElementById("toast-time").innerText = randomMenit + " menit yang lalu";
 
@@ -1063,8 +1063,8 @@
     // DATABASE PRODUK
     const DATABASE = {
       "Streaming & Music": {
-        "Netflix": ["Single Screen 1 Bulan [HOT] - Rp65.000", "1P1U 1 Hari - Rp5.000", "1P1U 3 Hari - Rp12.000", "1P1U 5 Hari - Rp15.000", "1P1U 7 Hari - Rp18.000", "1P1U 1 Bulan - Rp45.000", "1P1U 2 Bulan - Rp88.000", "1P1U 3 Bulan - Rp115.000", "1P2U 1 Bulan - Rp30.000", "1P2U 2 Bulan - Rp55.000", "1P2U 3 Bulan - Rp65.000", "Semi Private 1 Bulan - Rp55.000", "Anti Limit (4U) 1 Bulan - Rp60.000", "Private 1 Bulan - Rp180.000"],
-        "YouTube": ["Famplan 1 Bulan - Rp10.000", "Famplan 2 Bulan - Rp15.000", "Famplan 3 Bulan - Rp20.000", "Famplan 4 Bulan - Rp30.000", "Indplan 1 Bulan - Rp25.000", "Mixplan 1 Bulan - Rp30.000", "Mixplan 3 Bulan - Rp30.000", "Mixplan 4 Bulan - Rp35.000", "Mixplan 5 Bulan - Rp47.000", "Mixplan 6 Bulan - Rp50.000"],
+        "Netflix": ["Single Screen 1 Bulan - Rp65.000", "1P1U 1 Hari - Rp5.000", "1P1U 3 Hari [HOT] - Rp12.000", "1P1U 5 Hari - Rp15.000", "1P1U 7 Hari [HOT] - Rp18.000", "1P1U 1 Bulan [HOT] - Rp45.000", "1P1U 2 Bulan - Rp88.000", "1P1U 3 Bulan - Rp115.000", "1P2U 1 Bulan [HOT] - Rp30.000", "1P2U 2 Bulan - Rp55.000", "1P2U 3 Bulan - Rp65.000", "Semi Private 1 Bulan - Rp55.000", "Anti Limit (4U) 1 Bulan - Rp60.000", "Private 1 Bulan - Rp180.000"],
+        "YouTube": ["Famplan 1 Bulan [HOT] - Rp10.000", "Famplan 2 Bulan [HOT] - Rp15.000", "Famplan 3 Bulan - Rp20.000", "Famplan 4 Bulan - Rp30.000", "Indplan 1 Bulan - Rp25.000", "Mixplan 1 Bulan - Rp30.000", "Mixplan 3 Bulan - Rp30.000", "Mixplan 4 Bulan - Rp35.000", "Mixplan 5 Bulan - Rp47.000", "Mixplan 6 Bulan - Rp50.000"],
         "Spotify": ["Famplan 1 Bulan - Rp30.000", "Famplan 2 Bulan - Rp55.000", "Famplan 3 Bulan - Rp65.000", "Indplan 1 Bulan - Rp35.000", "Indplan 2 Bulan - Rp60.000", "Indplan 3 Bulan - Rp75.000"],
         "Disney": ["Sharing/Anlim 1 Hari - Rp4.000 / Rp7.000", "Sharing/Anlim 3 Hari - Rp8.000 / Rp12.000", "Sharing/Anlim 5 Hari - Rp10.000 / Rp15.000", "Sharing/Anlim 7 Hari - Rp15.000 / Rp20.000", "Premium 1 Bulan 3U - Rp55.000", "Premium 1 Bulan 4U - Rp45.000", "Premium 1 Bulan 5U - Rp40.000", "Premium 1 Bulan 6U - Rp32.000", "Premium 1 Bulan 10U - Rp25.000", "Premium Private 1 Bulan - Rp130.000"],
         "Viu": ["Private Anlim/Biasa 1 Hari - Rp4.000 / Rp2.500", "Private Anlim/Biasa 3 Hari - Rp6.000 / Rp4.500", "Private Anlim/Biasa 7 Hari - Rp8.000 / Rp7.000", "Private Anlim/Biasa 1 Bulan - Rp15.000 / Rp10.000", "Private Anlim/Biasa 3 Bulan - Rp20.000 / Rp15.000", "Private Anlim/Biasa 6 Bulan - Rp25.000 / Rp20.000", "Private Anlim/Biasa 1 Tahun - Rp30.000 / Rp25.000"],
