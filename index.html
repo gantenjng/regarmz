@@ -178,7 +178,7 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       width: 100%;
     }
 
@@ -186,7 +186,7 @@
     .avatar-wrap {
       position: relative;
       display: inline-block;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       padding: 6px;
       border-radius: 50%;
     }
@@ -213,8 +213,8 @@
     .avatar {
       position: relative;
       z-index: 2;
-      width: 125px;
-      height: 125px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       border: 2.5px solid var(--bg-color);
       box-shadow: 0 0 25px rgba(226, 201, 169, 0.4), inset 0 0 12px rgba(0, 0, 0, 0.8);
@@ -226,24 +226,24 @@
       position: absolute;
       bottom: 8px;
       right: 12px;
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       background-color: #10b981;
       border: 3px solid var(--bg-color);
       border-radius: 50%;
       z-index: 3;
-      box-shadow: 0 0 10px #10b981;
+      box-shadow: 0 0 8px #10b981;
       transition: background-color 0.3s, box-shadow 0.3s;
     }
     .status-dot.closed {
       background-color: #ef4444 !important;
-      box-shadow: 0 0 10px #ef4444 !important;
+      box-shadow: 0 0 8px #ef4444 !important;
     }
     @keyframes putarHalo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @keyframes putarHaloReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
 
     .store-title {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 800;
       letter-spacing: 2px;
       display: flex;
@@ -252,28 +252,26 @@
       gap: 8px;
       text-transform: uppercase;
       color: var(--text-color);
-      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
     .verified-icon {
       color: var(--accent-color);
-      font-size: 20px;
-      filter: drop-shadow(0 0 5px rgba(226, 201, 169, 0.5));
+      font-size: 18px;
     }
     .store-subtitle {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       color: #94a3b8;
-      margin-top: 6px;
-      letter-spacing: 5px;
+      margin-top: 4px;
+      letter-spacing: 4px;
     }
     .store-bio {
-      font-size: 13.5px;
+      font-size: 13px;
       color: var(--text-color);
       opacity: 0.9;
-      margin: 14px 0 12px;
+      margin: 12px 0 14px;
       font-style: italic;
       font-weight: 300;
-      max-width: 440px;
+      max-width: 420px;
       line-height: 1.5;
     }
 
@@ -283,69 +281,68 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin-bottom: 16px;
-      font-size: 12.5px;
+      margin-bottom: 14px;
+      font-size: 12px;
       font-weight: 700;
-      padding: 6px 18px;
+      padding: 6px 16px;
       border-radius: 30px;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      letter-spacing: 0.5px;
     }
 
     .stats-bar {
       display: inline-flex;
       justify-content: center;
-      gap: 20px;
+      gap: 18px;
       background: var(--card-bg);
       backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       border: 1px solid var(--card-border);
-      padding: 11px 22px;
+      padding: 10px 20px;
       border-radius: 30px;
-      font-size: 12.5px;
+      font-size: 12px;
       color: #94a3b8;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
     .stats-bar span b { color: var(--accent-color); }
 
-    /* --- NOTIFIKASI / INFO MAINTENANCE BERJALAN --- */
+    /* --- BANNER MAINTENANCE (BISA DITUTUP) --- */
     .maintenance-banner {
       width: 100%;
-      background: rgba(239, 68, 68, 0.12);
-      border: 1px solid rgba(239, 68, 68, 0.35);
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
       color: #f87171;
-      padding: 10px 15px;
+      padding: 10px 14px;
       border-radius: 12px;
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 600;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
     .maintenance-banner b { color: #ef4444; }
+    .close-banner { background: none; border: none; color: #f87171; cursor: pointer; font-size: 16px; font-weight: bold; }
 
     /* --- TEKS PROMO BERJALAN --- */
     .promo-marquee {
       width: 100%;
-      margin-top: 10px;
+      margin-bottom: 20px;
       overflow: hidden;
       background: rgba(226, 201, 169, 0.05);
       border-top: 1px solid var(--card-border);
       border-bottom: 1px solid var(--card-border);
-      padding: 10px 0;
+      padding: 9px 0;
       position: relative;
     }
     .marquee-text {
       display: inline-block;
       white-space: nowrap;
       color: var(--accent-color);
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       animation: scrollMarquee 20s linear infinite;
     }
     @keyframes scrollMarquee {
@@ -358,65 +355,54 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 13px;
-      margin-top: 20px;
+      gap: 12px;
     }
     .action-btn {
       width: 100%;
       background: var(--card-bg);
       backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       border: 1px solid var(--card-border);
       color: var(--text-color);
-      padding: 16px 22px;
+      padding: 15px 20px;
       border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
       font-weight: 700;
-      font-size: 14.5px;
+      font-size: 14px;
       text-decoration: none;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      letter-spacing: 0.5px;
+      transition: all 0.25s ease;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      position: relative;
-      overflow: hidden;
     }
     .action-btn:hover {
       background: var(--accent-color);
       color: #0b0e14;
       border-color: var(--accent-color);
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(226, 201, 169, 0.4);
     }
     .action-btn:hover .arrow-icon { color: #0b0e14; transform: translateX(4px); }
-    .action-btn:active {
-      transform: scale(0.97) translateY(0);
-      box-shadow: 0 2px 10px rgba(226, 201, 169, 0.6);
-      transition: transform 0.08s ease;
-    }
+    .action-btn:active { transform: scale(0.97); }
     .btn-label { display: flex; align-items: center; gap: 12px; }
-    .arrow-icon { font-size: 14px; color: #94a3b8; transition: 0.25s; }
+    .arrow-icon { font-size: 13px; color: #94a3b8; transition: 0.25s; }
 
     .disclaimer-box {
-      margin-top: 30px;
-      background: rgba(226, 201, 169, 0.08);
+      margin-top: 25px;
+      background: rgba(226, 201, 169, 0.06);
       border: 1px solid var(--card-border);
       border-radius: 12px;
-      padding: 16px 18px;
+      padding: 15px 16px;
       text-align: center;
-      font-size: 12.5px;
+      font-size: 12px;
       color: #94a3b8;
       line-height: 1.6;
       width: 100%;
-      backdrop-filter: blur(5px);
     }
     .disclaimer-box b { color: var(--accent-color); }
 
     /* KUTIPAN TOKO */
     .quote-box {
-      margin-top: 25px;
+      margin-top: 22px;
       text-align: center;
       width: 100%;
       padding: 0 10px;
@@ -424,46 +410,66 @@
     .quote-title {
       color: var(--accent-color);
       font-weight: 800;
-      font-size: 13.5px;
+      font-size: 13px;
       letter-spacing: 2px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .quote-text {
       color: #94a3b8;
-      font-size: 12.5px;
-      line-height: 1.7;
+      font-size: 12px;
+      line-height: 1.6;
       font-style: italic;
-      margin-bottom: 12px;
-      letter-spacing: 0.5px;
+      margin-bottom: 10px;
     }
     .quote-line { color: var(--accent-color); letter-spacing: -2px; opacity: 0.4; }
-    .copyright { margin-top: 25px; font-size: 12.5px; color: #6e7681; font-weight: 600; letter-spacing: 1px; }
+    .copyright { margin-top: 20px; font-size: 12px; color: #6e7681; font-weight: 600; letter-spacing: 1px; }
 
-    /* --- TOMBOL SHARE WEB --- */
+    /* --- TOMBOL SHARE & BACK TO TOP ---. */
     .share-web-btn {
       margin-top: 15px;
       background: transparent;
       border: 1px dashed var(--card-border);
       color: var(--accent-color);
-      padding: 10px 20px;
+      padding: 9px 18px;
       border-radius: 20px;
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       transition: 0.2s;
     }
     .share-web-btn:hover { background: rgba(226,201,169,0.1); transform: scale(1.05); }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 95px;
+      right: 25px;
+      width: 44px;
+      height: 44px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--accent-color);
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 85;
+      font-size: 18px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: 0.2s;
+    }
+    .back-to-top:hover { transform: scale(1.1); background: var(--accent-color); color: #0b0e14; }
 
     /* --- FLOATING WA BUTTON --- */
     .float-wa {
       position: fixed;
       bottom: 25px;
       right: 25px;
-      width: 58px;
-      height: 58px;
+      width: 56px;
+      height: 56px;
       background: #25d366;
       border: 2px solid rgba(255, 255, 255, 0.3);
       border-radius: 50%;
@@ -476,16 +482,8 @@
       transition: 0.3s;
       text-decoration: none;
     }
-    .float-wa:hover {
-      transform: scale(1.1) rotate(-8deg);
-      background: #20ba59;
-      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
-    }
-    .float-wa svg {
-      width: 32px;
-      height: 32px;
-      fill: #ffffff;
-    }
+    .float-wa:hover { transform: scale(1.1) rotate(-8deg); background: #20ba59; }
+    .float-wa svg { width: 30px; height: 30px; fill: #ffffff; }
 
     /* --- TOAST NOTIFIKASI --- */
     .toast-notification {
@@ -494,7 +492,6 @@
       left: 20px;
       background: var(--card-bg);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       border: 1px solid var(--card-border);
       padding: 12px 18px;
       border-radius: 14px;
@@ -508,29 +505,20 @@
       pointer-events: none;
       max-width: 90%;
     }
-    .toast-notification.show {
-      bottom: 20px;
-      opacity: 1;
-    }
-    .toast-icon {
-      font-size: 22px;
-      background: rgba(226, 201, 169, 0.15);
-      padding: 7px;
-      border-radius: 50%;
-    }
+    .toast-notification.show { bottom: 20px; opacity: 1; }
+    .toast-icon { font-size: 22px; background: rgba(226, 201, 169, 0.15); padding: 7px; border-radius: 50%; }
     .toast-text { display: flex; flex-direction: column; }
-    .toast-title { color: var(--accent-color); font-size: 12.5px; font-weight: 800; margin-bottom: 2px; }
-    .toast-desc { color: var(--text-color); font-size: 12px; font-weight: 600; opacity: 0.9; }
-    .toast-time { color: #64748b; font-size: 10.5px; margin-top: 2px; }
+    .toast-title { color: var(--accent-color); font-size: 12px; font-weight: 800; margin-bottom: 2px; }
+    .toast-desc { color: var(--text-color); font-size: 11.5px; font-weight: 600; opacity: 0.9; }
+    .toast-time { color: #64748b; font-size: 10px; margin-top: 2px; }
 
-    /* --- MODAL DRAWER --- */
+    /* --- MODAL DRAWER (DIKUNCI RAPI DI HP/DESKTOP) --- */
     .drawer-overlay {
       display: none;
       position: fixed;
       inset: 0;
       background: rgba(2, 4, 8, 0.85);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       z-index: 99;
       justify-content: center;
       align-items: center;
@@ -538,23 +526,23 @@
     }
     .drawer-content {
       width: 100%;
-      max-width: 650px;
+      max-width: 600px;
       background: var(--modal-bg); 
-      backdrop-filter: blur(25px) saturate(150%);
+      backdrop-filter: blur(25px);
       border: 1px solid var(--card-border);
       border-radius: 20px;
-      padding: 20px;
-      max-height: 90vh;
+      padding: 22px;
+      max-height: 88vh;
       overflow-y: auto;
       box-sizing: border-box;
-      animation: modalFadeIn 0.3s ease-out;
+      animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 20px 50px rgba(0,0,0,0.85);
     }
-    .drawer-content::-webkit-scrollbar { width: 6px; }
+    .drawer-content::-webkit-scrollbar { width: 5px; }
     .drawer-content::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
 
     @keyframes modalFadeIn {
-      from { opacity: 0; transform: scale(0.96) translateY(10px); }
+      from { opacity: 0; transform: scale(0.95) translateY(8px); }
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
     
@@ -563,18 +551,18 @@
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--card-border);
-      padding-bottom: 14px;
+      padding-bottom: 12px;
       margin-bottom: 15px;
       position: sticky;
-      top: -20px;
+      top: -22px;
       background: var(--modal-bg);
       backdrop-filter: blur(10px);
       z-index: 10;
-      padding-top: 20px;
-      margin-top: -20px;
+      padding-top: 18px;
+      margin-top: -22px;
     }
     .drawer-header h3 {
-      font-size: 16px;
+      font-size: 15.5px;
       color: var(--text-color);
       font-weight: 800;
       letter-spacing: 0.5px;
@@ -582,115 +570,90 @@
       align-items: center;
       gap: 8px;
     }
-    .nav-btn { background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; transition: 0.2s; }
-    .nav-btn:hover { color: var(--accent-color); transform: scale(1.15); }
-    .nav-btn:active { transform: scale(0.9); }
+    .nav-btn { background: none; border: none; color: #94a3b8; font-size: 22px; cursor: pointer; transition: 0.2s; }
+    .nav-btn:hover { color: var(--accent-color); transform: scale(1.1); }
 
     /* LABEL HOT */
     .hot-label {
       background: rgba(226, 201, 169, 0.15); border: 1px solid var(--accent-color); color: var(--accent-color);
-      font-size: 10px; font-weight: 800; padding: 2px 5px; border-radius: 6px;
-      margin-left: 6px; vertical-align: middle; letter-spacing: 1px;
+      font-size: 9.5px; font-weight: 800; padding: 2px 5px; border-radius: 5px;
+      margin-left: 6px; vertical-align: middle;
     }
 
     /* PENCARIAN & KATEGORI */
     .search-box { margin-bottom: 12px; }
     .search-box input {
       width: 100%; background: var(--input-bg); border: 1px solid var(--card-border);
-      color: var(--text-color); padding: 13px 16px; border-radius: 12px; font-size: 14px; outline: none; transition: 0.3s;
+      color: var(--text-color); padding: 12px 15px; border-radius: 12px; font-size: 13.5px; outline: none;
     }
-    .search-box input:focus { border-color: var(--accent-color); box-shadow: 0 0 10px rgba(226, 201, 169, 0.2); }
+    .search-box input:focus { border-color: var(--accent-color); }
     
     .filter-tools {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       margin-bottom: 14px;
     }
     @media(min-width: 480px) {
-      .filter-tools {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
+      .filter-tools { flex-direction: row; justify-content: space-between; align-items: center; }
     }
-    .category-chips { 
-      display: flex; 
-      gap: 6px; 
-      overflow-x: auto; 
-      padding-bottom: 4px; 
-      width: 100%;
-    }
-    .category-chips::-webkit-scrollbar { height: 4px; }
+    .category-chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; width: 100%; }
+    .category-chips::-webkit-scrollbar { height: 3px; }
     .category-chips::-webkit-scrollbar-thumb { background: rgba(48, 54, 61, 0.5); border-radius: 10px; }
     .chip {
       background: var(--input-bg); border: 1px solid var(--card-border); color: #94a3b8;
-      padding: 7px 14px; border-radius: 20px; font-size: 11.5px; font-weight: 700; cursor: pointer;
-      white-space: nowrap; transition: 0.2s; letter-spacing: 0.5px;
+      padding: 7px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer;
+      white-space: nowrap; transition: 0.2s;
     }
     .chip:hover { border-color: var(--accent-color); color: var(--accent-color); }
     .chip.active { background: var(--accent-color); color: #0d1117; border-color: var(--accent-color); }
 
     .sort-select {
-      background: var(--input-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text-color);
-      padding: 8px 12px;
-      border-radius: 16px;
-      font-size: 12px;
-      font-weight: 700;
-      outline: none;
-      cursor: pointer;
-      width: 100%;
+      background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-color);
+      padding: 7px 12px; border-radius: 14px; font-size: 11.5px; font-weight: 700; outline: none; cursor: pointer; width: 100%;
     }
-    @media(min-width: 480px) {
-      .sort-select { width: auto; }
-    }
+    @media(min-width: 480px) { .sort-select { width: auto; } }
 
     /* PRODUK LIST */
-    .product-list { 
-      display: flex; 
-      flex-direction: column; 
-      gap: 10px; 
-    }
+    .product-list { display: flex; flex-direction: column; gap: 8px; }
     .product-item {
       display: flex; justify-content: space-between; align-items: center;
       background: var(--card-bg); border: 1px solid var(--card-border);
-      padding: 14px 16px; border-radius: 12px; cursor: pointer; color: var(--text-color);
-      font-size: 13.5px; font-weight: 600; transition: all 0.2s ease;
+      padding: 13px 15px; border-radius: 12px; cursor: pointer; color: var(--text-color);
+      font-size: 13px; font-weight: 600; transition: all 0.2s ease;
     }
     .product-item:hover { border-color: var(--accent-color); transform: translateY(-1px); }
     .item-left { display: flex; align-items: center; gap: 10px; overflow: hidden; }
-    .app-logo { width: 22px; height: 22px; border-radius: 6px; object-fit: contain; background: #ffffff; padding: 2px; flex-shrink: 0; }
-    .fav-icon { font-size: 16px; filter: grayscale(100%) opacity(0.3); transition: 0.2s; cursor: pointer; flex-shrink: 0; }
-    .fav-icon.active { filter: none; transform: scale(1.2); text-shadow: 0 0 12px var(--accent-color); }
+    .app-logo { width: 22px; height: 22px; border-radius: 5px; object-fit: contain; background: #ffffff; padding: 2px; flex-shrink: 0; }
+    .fav-icon { font-size: 15px; filter: grayscale(100%) opacity(0.3); transition: 0.2s; cursor: pointer; flex-shrink: 0; }
+    .fav-icon.active { filter: none; transform: scale(1.2); text-shadow: 0 0 10px var(--accent-color); }
     .prod-price { color: var(--accent-color); font-weight: 800; text-align: right; flex-shrink: 0; margin-left: 8px; }
 
     /* FORM & KETENTUAN */
     .order-form { display: flex; flex-direction: column; gap: 14px; }
-    .form-box label { font-size: 13px; color: #94a3b8; font-weight: 700; margin-bottom: 6px; display: block; }
+    .form-box label { font-size: 12.5px; color: #94a3b8; font-weight: 700; margin-bottom: 6px; display: block; }
     .form-box input, .form-box select {
       width: 100%; background: var(--input-bg); border: 1px solid var(--card-border);
-      color: var(--text-color); padding: 13px 15px; border-radius: 12px; font-size: 14px; outline: none;
+      color: var(--text-color); padding: 12px 14px; border-radius: 12px; font-size: 13.5px; outline: none;
     }
     .form-box input:focus, .form-box select:focus { border-color: var(--accent-color); }
-    .info-note { font-size: 12.5px; color: var(--accent-color); background: rgba(226, 201, 169, 0.08); padding: 12px; border-radius: 10px; border-left: 4px solid var(--accent-color); line-height: 1.5; }
+    .info-note { font-size: 12px; color: var(--accent-color); background: rgba(226, 201, 169, 0.08); padding: 12px; border-radius: 10px; border-left: 4px solid var(--accent-color); line-height: 1.5; }
     
-    .snk-container { display: flex; flex-direction: column; gap: 12px; padding-bottom: 5px; }
-    .snk-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 16px; }
-    .snk-title { color: var(--accent-color); font-size: 14px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 10px; text-align: center; border-bottom: 1px dashed var(--card-border); padding-bottom: 8px; }
-    .snk-text p { font-size: 13px; color: var(--text-color); opacity: 0.9; line-height: 1.7; margin-bottom: 5px; }
+    .snk-container { display: flex; flex-direction: column; gap: 12px; }
+    .snk-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 15px; }
+    .snk-title { color: var(--accent-color); font-size: 13.5px; font-weight: 800; margin-bottom: 10px; text-align: center; border-bottom: 1px dashed var(--card-border); padding-bottom: 8px; }
+    .snk-text p { font-size: 12.5px; color: var(--text-color); opacity: 0.9; line-height: 1.7; margin-bottom: 5px; }
 
     .submit-btn, .copy-btn {
-      background: var(--accent-color); color: #080b10; font-weight: 800; border: none; padding: 15px; border-radius: 12px;
-      font-size: 14px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
+      background: var(--accent-color); color: #080b10; font-weight: 800; border: none; padding: 14px; border-radius: 12px;
+      font-size: 13.5px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
     }
     .submit-btn:hover, .copy-btn:hover { opacity: 0.9; box-shadow: 0 0 15px rgba(226, 201, 169, 0.4); }
-    .submit-btn:active, .copy-btn:active { transform: scale(0.96); }
+    .submit-btn:active { transform: scale(0.96); }
 
     .ask-btn {
       background: transparent; color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 13px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer;
+      padding: 12px; border-radius: 12px; font-size: 12.5px; font-weight: 700; cursor: pointer;
       transition: 0.3s; text-align: center; width: 100%;
     }
     .ask-btn:hover { background: rgba(148, 163, 184, 0.1); color: var(--accent-color); border-color: var(--accent-color); }
@@ -698,29 +661,25 @@
     /* --- NOTA DIGITAL --- */
     .receipt-wrapper {
       background: #11141a; border: 1px dashed rgba(226, 201, 169, 0.5); border-radius: 10px;
-      padding: 18px; margin-bottom: 15px; font-family: 'JetBrains Mono', monospace;
-      color: #cbd5e1; position: relative;
+      padding: 16px; margin-bottom: 14px; font-family: 'JetBrains Mono', monospace; color: #cbd5e1;
     }
     .receipt-header {
-      text-align: center; font-weight: 700; color: #e2c9a9; font-size: 16px;
-      margin-bottom: 12px; border-bottom: 2px dashed rgba(226, 201, 169, 0.3); padding-bottom: 8px;
+      text-align: center; font-weight: 700; color: #e2c9a9; font-size: 15px;
+      margin-bottom: 10px; border-bottom: 2px dashed rgba(226, 201, 169, 0.3); padding-bottom: 6px;
     }
-    .receipt-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; }
+    .receipt-row { display: flex; justify-content: space-between; margin-bottom: 7px; font-size: 12.5px; }
     .receipt-row span:last-child { color: #fff; font-weight: 600; text-align: right; max-width: 60%; }
     .receipt-total {
-      margin-top: 12px; padding-top: 12px; border-top: 2px dashed rgba(226, 201, 169, 0.3);
-      color: #e2c9a9; font-weight: 800; font-size: 14.5px; display: flex; justify-content: space-between; align-items: center;
+      margin-top: 10px; padding-top: 10px; border-top: 2px dashed rgba(226, 201, 169, 0.3);
+      color: #e2c9a9; font-weight: 800; font-size: 14px; display: flex; justify-content: space-between; align-items: center;
     }
-    .copy-pill {
-      background: #e2c9a9; color: #080b10; font-size: 11px; font-weight: 700; padding: 4px 10px;
-      border-radius: 6px; cursor: pointer; border: none;
-    }
+    .copy-pill { background: #e2c9a9; color: #080b10; font-size: 10.5px; font-weight: 700; padding: 4px 9px; border-radius: 5px; cursor: pointer; border: none; }
     .copy-pill:hover { background: #fff; }
 
     /* FAQ STYLING */
     .faq-item { margin-bottom: 10px; border-bottom: 1px solid var(--card-border); padding-bottom: 8px; }
-    .faq-q { font-weight: 700; color: var(--accent-color); font-size: 13.5px; cursor: pointer; }
-    .faq-a { font-size: 12.5px; color: var(--text-color); opacity: 0.8; margin-top: 4px; line-height: 1.5; }
+    .faq-q { font-weight: 700; color: var(--accent-color); font-size: 13px; cursor: pointer; }
+    .faq-a { font-size: 12px; color: var(--text-color); opacity: 0.8; margin-top: 4px; line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -753,7 +712,7 @@
         <span class="status-dot" id="header-status-dot" title="Status Operasional"></span>
       </div>
       <div class="store-title">REGARM-MART <span class="verified-icon">✦</span></div>
-      <div class="store-subtitle">PREMIUM APPS</div>
+      <div class="store-subtitle" id="dynamic-greeting">PREMIUM APPS</div>
       <p class="store-bio">"your one-stop premium store. tap menu di bawah untuk order"</p>
       
       <!-- BADGE STATUS -->
@@ -769,10 +728,11 @@
       </div>
     </div>
 
-    <!-- PENGUMUMAN / INFO MAINTENANCE (Bisa di-hide atau ditampilkan sesuai kebutuhan) -->
-    <div class="maintenance-banner">
+    <!-- PENGUMUMAN MAINTENANCE (BISA DITUTUP) -->
+    <div class="maintenance-banner" id="maintenance-box">
       <span>⚠️</span>
-      <div><b>Info Store:</b> Antrean proses normal (1-15 min). Harap bersabar ya min!</div>
+      <div><b>Info Store:</b> Antrean normal (1-15 min). Mohon sabar ya min!</div>
+      <button class="close-banner" onclick="document.getElementById('maintenance-box').style.display='none'">&times;</button>
     </div>
 
     <!-- Teks Promo Berjalan -->
@@ -835,6 +795,9 @@
     </footer>
   </div>
 
+  <!-- TOMBOL KEMBALI KE ATAS -->
+  <button class="back-to-top" id="backToTopBtn" onclick="scrollToTop()" title="Kembali ke atas">▲</button>
+
   <!-- TOMBOL WA MELAYANG -->
   <a href="https://wa.me/62895325627342?text=Halo%20Admin,%20saya%20mau%20tanya%20layanan" target="_blank" class="float-wa" title="Hubungi WhatsApp Admin">
     <svg viewBox="0 0 24 24">
@@ -883,7 +846,7 @@
           <button class="nav-btn" onclick="tutupSemua()">&times;</button>
         </div>
         
-        <div class="filter-tools" style="margin-bottom: 14px;">
+        <div class="filter-tools" style="margin-bottom: 12px;">
           <button class="chip" onclick="bukaInfoAplikasi()" style="border-color: var(--accent-color); color: var(--accent-color); background: rgba(226, 201, 169, 0.1);">
             ℹ️ Info Aplikasi
           </button>
@@ -895,7 +858,7 @@
           </select>
         </div>
 
-        <div style="font-size: 12.5px; color: var(--text-color); opacity: 0.9; background: rgba(226, 201, 169, 0.08); border: 1px dashed var(--card-border); padding: 10px 14px; border-radius: 10px; margin-bottom: 14px;">
+        <div style="font-size: 12px; color: var(--text-color); opacity: 0.9; background: rgba(226, 201, 169, 0.08); border: 1px dashed var(--card-border); padding: 10px 14px; border-radius: 10px; margin-bottom: 12px;">
           🐺 Klik ikon serigala untuk menyimpan ke <b>Favorit Saya</b> secara permanen!
         </div>
 
@@ -959,7 +922,7 @@
           <div class="receipt-row"><span>Order ID:</span> <span id="nota-id"></span></div>
           <div class="receipt-row"><span>Status:</span> <span style="color: #10b981;">UNPAID (Pending WA)</span></div>
           <div class="receipt-row"><span>Waktu:</span> <span id="nota-waktu"></span></div>
-          <div style="margin: 12px 0; border-top: 1px dashed rgba(226,201,169,0.3);"></div>
+          <div style="margin: 10px 0; border-top: 1px dashed rgba(226,201,169,0.3);"></div>
           
           <div class="receipt-row"><span>Aplikasi:</span> <span id="nota-app"></span></div>
           <div class="receipt-row"><span>Paket/Durasi:</span> <span id="nota-paket"></span></div>
@@ -983,16 +946,16 @@
           <h3>💬 HUBUNGI ADMIN</h3>
           <button class="nav-btn" onclick="tutupSemua()">&times;</button>
         </div>
-        <div class="content-list" style="display:flex; flex-direction:column; gap:12px;">
+        <div class="content-list" style="display:flex; flex-direction:column; gap:10px;">
           <a class="action-btn" href="https://wa.me/62895325627342?text=Halo%20Admin,%20saya%20mau%20tanya%20layanan" target="_blank" onclick="vibratePhone()">
-            <span class="btn-label" style="font-size: 14.5px;">📱 WhatsApp Admin Utama</span>
+            <span class="btn-label" style="font-size: 14px;">📱 WhatsApp Admin Utama</span>
             <span class="arrow-icon">&#10095;</span>
           </a>
           <button class="action-btn" onclick="salinNoWA()" style="background:var(--input-bg);">
-            <span class="btn-label" style="font-size: 14.5px;">📋 Salin Nomor WA (0895325627342)</span>
+            <span class="btn-label" style="font-size: 14px;">📋 Salin Nomor WA (0895325627342)</span>
           </button>
           <a class="action-btn" href="https://x.com/klebuss" target="_blank" onclick="vibratePhone()">
-            <span class="btn-label" style="font-size: 14.5px;">𝕏 Akun X (Twitter)</span>
+            <span class="btn-label" style="font-size: 14px;">𝕏 Akun X (Twitter)</span>
             <span class="arrow-icon">&#10095;</span>
           </a>
         </div>
@@ -1047,7 +1010,7 @@
           <div class="snk-box" style="position: relative;">
             <div class="snk-title">✦ KLAIM GARANSI</div>
             <div class="snk-text">
-              <p style="color: var(--accent-color); text-align: center; margin-bottom: 8px; font-weight: 700;">☆ ✪ FORMAT KLAIM GARANSI ✪</p>
+              <p style="color: var(--accent-color); text-align: center; margin-bottom: 6px; font-weight: 700;">☆ ✪ FORMAT KLAIM GARANSI ✪</p>
               <p>ミ Nama aplikasi : </p>
               <p>ミ Email: </p>
               <p>ミ Password:</p>
@@ -1065,7 +1028,7 @@
               <p>❖ Bisa untuk renewal.</p>
             </div>
             
-            <button class="copy-btn" onclick="salinFormatGaransi()" style="width: 100%; margin-top: 15px; background: rgba(226, 201, 169, 0.15); border: 1px dashed rgba(226, 201, 169, 0.5); padding: 13px;">
+            <button class="copy-btn" onclick="salinFormatGaransi()" style="width: 100%; margin-top: 12px; background: rgba(226, 201, 169, 0.15); border: 1px dashed rgba(226, 201, 169, 0.5); padding: 12px;">
               📋 SALIN FORMAT KLAIM GARANSI
             </button>
           </div>
@@ -1080,7 +1043,7 @@
           <button class="nav-btn" onclick="tutupSemua()">&times;</button>
         </div>
         <div class="snk-box">
-          <div class="snk-text" id="desc-app-info" style="line-height: 1.8;">
+          <div class="snk-text" id="desc-app-info" style="line-height: 1.7;">
             Penjelasan detail aplikasi akan muncul di sini.
           </div>
         </div>
@@ -1093,6 +1056,33 @@
     // --- HAPTIC FEEDBACK ---
     function vibratePhone() {
       if (navigator.vibrate) { navigator.vibrate(20); }
+    }
+
+    // --- SAPAAN WAKTU OTOMATIS (No. 10) ---
+    window.addEventListener('DOMContentLoaded', () => {
+      const hour = new Date().getHours();
+      let greeting = "PREMIUM APPS";
+      if (hour >= 4 && hour < 11) greeting = "SELAMAT PAGI ☀️";
+      else if (hour >= 11 && hour < 15) greeting = "SELAMAT SIANG ⚡";
+      else if (hour >= 15 && hour < 18) greeting = "SELAMAT SORE ☕";
+      else greeting = "SELAMAT MALAM 🌙";
+      
+      const sub = document.getElementById("dynamic-greeting");
+      if(sub) sub.innerText = greeting;
+    });
+
+    // --- BACK TO TOP SCROLL (No. 9) ---
+    const backToTopBtn = document.getElementById("backToTopBtn");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = "flex";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+    function scrollToTop() {
+      vibratePhone();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     // --- DARK / LIGHT MODE ---
@@ -1436,14 +1426,14 @@
       }
 
       if(matchedApps.length === 0) {
-        box.innerHTML = `<div style="text-align:center; padding: 30px; color:#94a3b8;">Tidak ada aplikasi ditemukan.</div>`;
+        box.innerHTML = `<div style="text-align:center; padding: 25px; color:#94a3b8; font-size:13px;">Tidak ada aplikasi ditemukan.</div>`;
         return;
       }
 
       matchedApps.forEach(item => {
         const row = document.createElement("div"); 
         row.className = "product-item";
-        row.innerHTML = `<div class="item-left"><img class="app-logo" src="${getLogoUrl(item.name)}" onerror="this.src='https://api.dicebear.com/7.x/identicon/svg?seed=${item.name}'"><span style="font-size: 14.5px;">${item.name} ${item.hot ? '<span class="hot-label">🔥 HOT</span>' : ''}</span></div><span class="arrow-icon">&#10095;</span>`;
+        row.innerHTML = `<div class="item-left"><img class="app-logo" src="${getLogoUrl(item.name)}" onerror="this.src='https://api.dicebear.com/7.x/identicon/svg?seed=${item.name}'"><span style="font-size: 14px;">${item.name} ${item.hot ? '<span class="hot-label">🔥 HOT</span>' : ''}</span></div><span class="arrow-icon">&#10095;</span>`;
         row.onclick = () => { vibratePhone(); pKategoriApp = item.kat; pilihPaket(item.name); }; 
         box.appendChild(row);
       });
