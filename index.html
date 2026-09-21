@@ -162,11 +162,6 @@
       display: block;
     }
     .status-dot {
-      /* Status Tutup (Merah) */
-    .status-dot.closed {
-      background-color: #ef4444 !important;
-      box-shadow: 0 0 10px #ef4444 !important;
-    }
       position: absolute;
       bottom: 8px;
       right: 12px;
@@ -177,6 +172,11 @@
       border-radius: 50%;
       z-index: 3;
       box-shadow: 0 0 10px #10b981;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+    .status-dot.closed {
+      background-color: #ef4444 !important;
+      box-shadow: 0 0 10px #ef4444 !important;
     }
     @keyframes putarHalo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @keyframes putarHaloReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
@@ -208,10 +208,26 @@
     .store-bio {
       font-size: 14px;
       color: #cbd5e1;
-      margin: 16px 0 24px;
+      margin: 16px 0 14px;
       font-style: italic;
       font-weight: 300;
     }
+
+    /* BADGE STATUS OPERASIONAL TOKO */
+    .store-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 18px;
+      border-radius: 20px;
+      background: rgba(18, 23, 31, 0.85);
+      border: 1px solid rgba(226, 201, 169, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
     .stats-bar {
       display: inline-flex;
       justify-content: center;
@@ -368,7 +384,7 @@
     }
     .float-wa span { font-size: 30px; }
 
-    /* --- TOAST NOTIFIKASI SALES (POP-UP FOMO) --- */
+    /* --- TOAST NOTIFIKASI SALES (FOMO) --- */
     .toast-notification {
       position: fixed;
       bottom: -100px;
@@ -604,18 +620,18 @@
     <div class="profile-section">
       <div class="avatar-wrap">
         <img class="avatar" src="ava.png" alt="ZAY Profile" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=REGARM'">
-        <span class="status-dot" title="Toko Sedang Buka"></span>
+        <span class="status-dot" id="header-status-dot" title="Status Operasional"></span>
       </div>
       <div class="store-title">REGARM-MART <span class="verified-icon">✦</span></div>
       <div class="store-subtitle">PREMIUM APPS</div>
       <p class="store-bio">"Providing cheap, trusted, and fully guaranteed premium apps since 2023 ⚡"</p>
       
-      <!-- Indikator Buka / Tutup Otomatis -->
-      <div id="store-status-badge" style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 13px; font-weight: 700; padding: 6px 16px; border-radius: 20px; background: rgba(18, 23, 31, 0.8); border: 1px solid rgba(226, 201, 169, 0.25);">
-        <span id="status-icon">🟢</span>
-        <span id="status-text" style="color: #e2e8f0;">Memeriksa status toko...</span>
+      <!-- BADGE STATUS OTOMATIS BUKA / TUTUP -->
+      <div class="store-badge">
+        <span id="badge-status-icon">🟢</span>
+        <span id="badge-status-text" style="color: #e2c9a9;">Memeriksa status toko...</span>
       </div>
-      
+
       <div class="stats-bar">
         <span>⭐ <b>4.9/5.0</b> Rating</span>
         <span>⚡ <b>Instant</b> Proses</span>
@@ -623,7 +639,7 @@
       </div>
     </div>
 
-    <!-- Teks Promo Berjalan Lama -->
+    <!-- Teks Promo Berjalan -->
     <div class="promo-marquee">
       <span class="marquee-text">
         ✦ NANTIKAN PENAWARAN EKSKLUSIF REGARM-MART ✧ QUALITY GUARANTEED ✦ STAY TUNED FOR MORE UPDATES ✧ PROSES CEPAT AMAN ✦
@@ -878,7 +894,7 @@
   </div>
 
   <script>
-    // --- MENGHILANGKAN SPLASH SCREEN SETELAH LOADING ---
+    // --- SPLASH SCREEN LOGIC ---
     window.addEventListener('load', () => {
       setTimeout(() => {
         const splash = document.getElementById('splash-screen');
@@ -887,7 +903,7 @@
       }, 1200);
     });
 
-    // --- ANIMASI MEMANTUL ---
+    // --- ANIMASI ELEMEN MEMANTUL ---
     const bgContainer = document.getElementById("bouncing-container");
     const bounceItems = [];
     for (let i = 0; i < 8; i++) {
@@ -927,13 +943,49 @@
     }
     requestAnimationFrame(animate);
 
+    // --- LOGIKA JAM KERJA OTOMATIS (10.00 - 00.30 WIB) ---
+    function checkJamOperasional() {
+      const now = new Date();
+      // Konversi ke zona WIB (UTC+7)
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const wibDate = new Date(utc + (3600000 * 7));
+      
+      const jam = wibDate.getHours();
+      const menit = wibDate.getMinutes();
+      const totalMenit = (jam * 60) + menit;
+
+      // 10.00 = 600 menit | 00.30 = 30 menit
+      const isBuka = (totalMenit >= 600 || totalMenit <= 30);
+
+      const headerDot = document.getElementById("header-status-dot");
+      const badgeIcon = document.getElementById("badge-status-icon");
+      const badgeText = document.getElementById("badge-status-text");
+
+      if (isBuka) {
+        if (headerDot) headerDot.classList.remove("closed");
+        if (badgeIcon) badgeIcon.innerText = "🟢";
+        if (badgeText) {
+          badgeText.innerText = "Sedang Buka (10.00 – 00.30 WIB)";
+          badgeText.style.color = "#10b981";
+        }
+      } else {
+        if (headerDot) headerDot.classList.add("closed");
+        if (badgeIcon) badgeIcon.innerText = "🔴";
+        if (badgeText) {
+          badgeText.innerText = "Sedang Tutup (Buka 10.00 WIB)";
+          badgeText.style.color = "#ef4444";
+        }
+      }
+    }
+    checkJamOperasional();
+    setInterval(checkJamOperasional, 60000); // Periksa setiap menit
+
     // --- POPUP NOTIFIKASI SALES (FOMO) ---
     const toastKota = ["Jakarta", "Surabaya", "Bandung", "Medan", "Makassar", "Bali", "Semarang", "Yogyakarta"];
     const toastProduk = ["Netflix 1 Bulan", "Spotify Famplan", "Canva 1 Tahun", "YouTube Premium", "Capcut Private", "Viu 1 Tahun", "ChatGPT Plus"];
     
     function showRandomToast() {
       const toast = document.getElementById("sales-toast");
-      // Jangan munculkan popup kalau laci menu/modal sedang terbuka
       if(document.getElementById("drawer-modal").style.display === "flex") return; 
 
       const randomKota = toastKota[Math.floor(Math.random() * toastKota.length)];
@@ -945,10 +997,9 @@
       document.getElementById("toast-time").innerText = randomMenit + " menit yang lalu";
 
       toast.classList.add("show");
-      setTimeout(() => { toast.classList.remove("show"); }, 4500); // Tampil 4.5 detik
+      setTimeout(() => { toast.classList.remove("show"); }, 4500);
     }
 
-    // Mulai muncul setelah 3 detik web dibuka, lalu ulangi tiap 15 detik
     setTimeout(() => {
       showRandomToast();
       setInterval(showRandomToast, 15000);
@@ -1000,9 +1051,7 @@
 
     function getLogoUrl(appName) { return `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${appDomains[appName] || "google.com"}&size=64`; }
 
-    // --- DATABASE PAKET & CARA MENAMBAH TAG [HOT] MANUAL ---
-    // Tambahkan kata [HOT] pada nama durasi paket yang kamu inginkan. 
-    // Contoh di bawah ini ada pada "Netflix" dan "Canva".
+    // DATABASE PRODUK
     const DATABASE = {
       "Streaming & Music": {
         "Netflix": ["Single Screen 1 Bulan [HOT] - Rp65.000", "1P1U 1 Hari - Rp5.000", "1P1U 3 Hari - Rp12.000", "1P1U 5 Hari - Rp15.000", "1P1U 7 Hari - Rp18.000", "1P1U 1 Bulan - Rp45.000", "1P1U 2 Bulan - Rp88.000", "1P1U 3 Bulan - Rp115.000", "1P2U 1 Bulan - Rp30.000", "1P2U 2 Bulan - Rp55.000", "1P2U 3 Bulan - Rp65.000", "Semi Private 1 Bulan - Rp55.000", "Anti Limit (4U) 1 Bulan - Rp60.000", "Private 1 Bulan - Rp180.000"],
@@ -1097,7 +1146,6 @@
         let harga = parts.length > 1 ? parts[1] : "";
         let showHot = false;
         
-        // Logika Auto HOT Dihapus. Sekarang murni baca tulisan [HOT] manual dari database
         if (namaAsli.includes("[HOT]")) {
           showHot = true;
           namaAsli = namaAsli.replace("[HOT]", "").trim();
@@ -1144,7 +1192,6 @@
         document.getElementById("nota-row-yt").style.display = "none";
       }
 
-      // FORMAT WA FINAL (Sudah Menyertakan Emoji Kertas 📝 dan Jam Order ⏰)
       const formatPesan = `Halo Admin REGARM-MART, saya mau konfirmasi pesanan!\n\n*📝 NOTA PESANAN | ${orderId}*\n*⏰ Waktu Order:* ${timeStrFinal}\n----------------------------------\n• Produk: ${pApp} - ${pNamaPaket}\n• Harga: ${pHarga} ${ytNote}\n• No. WhatsApp: ${waCust}\n• Pembayaran via: ${pay}\n----------------------------------\nSegera diproses ya min, terima kasih! ⚡`;
       linkWaFinal = `https://wa.me/${NO_WA}?text=${encodeURIComponent(formatPesan)}`;
 
@@ -1152,46 +1199,6 @@
     }
 
     function lanjutKeWA() { if (linkWaFinal !== "") { window.open(linkWaFinal, "_blank"); } }
-    // --- CEK JAM BUKA OTOMATIS (10.00 - 00.30 WIB) ---
-    function updateJamOperasional() {
-      const now = new Date();
-      
-      // Ambil waktu WIB
-      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-      const wibDate = new Date(utc + (3600000 * 7));
-      
-      const jam = wibDate.getHours();
-      const menit = wibDate.getMinutes();
-      const totalMenit = (jam * 60) + menit;
-
-      // Jam buka: 10.00 (600 menit) sampai 00.30 malam (30 menit hari berikutnya)
-      // Artinya buka jika totalMenit >= 600 (jam 10.00 ke atas) ATAU totalMenit <= 30 (jam 00.00 - 00.30)
-      const isBuka = (totalMenit >= 600 || totalMenit <= 30);
-
-      const dot = document.querySelector(".status-dot");
-      const badgeIcon = document.getElementById("status-icon");
-      const badgeText = document.getElementById("status-text");
-
-      if (isBuka) {
-        if (dot) dot.classList.remove("closed");
-        if (badgeIcon) badgeIcon.innerText = "🟢";
-        if (badgeText) {
-          badgeText.innerText = "Sedang Buka (10.00 – 00.30 WIB)";
-          badgeText.style.color = "#10b981";
-        }
-      } else {
-        if (dot) dot.classList.add("closed");
-        if (badgeIcon) badgeIcon.innerText = "🔴";
-        if (badgeText) {
-          badgeText.innerText = "Sedang Tutup (Buka kembali 10.00 WIB)";
-          badgeText.style.color = "#ef4444";
-        }
-      }
-    }
-
-    // Jalankan saat web dibuka dan perbarui tiap 1 menit
-    updateJamOperasional();
-    setInterval(updateJamOperasional, 60000);
   </script>
 </body>
 </html>
