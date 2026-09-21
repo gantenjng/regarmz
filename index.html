@@ -8,7 +8,7 @@
   <!-- FAVICON RESMI -->
   <link rel="icon" type="image/png" href="ava.png">
 
-  <!-- META TAG OPEN GRAPH (PRATINJAU SHARE LINK WA, TELEGRAM, TWITTER) -->
+  <!-- META TAG OPEN GRAPH -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://regarmz.shop/">
   <meta property="og:title" content="REGARM-MART | Premium Apps Store">
@@ -24,21 +24,42 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --bg-color: #07090e;
+      --text-color: #e2e8f0;
+      --accent-color: #e2c9a9;
+      --card-bg: rgba(18, 23, 31, 0.75);
+      --card-border: rgba(226, 201, 169, 0.25);
+      --modal-bg: rgba(13, 17, 24, 0.9);
+      --input-bg: rgba(8, 11, 16, 0.7);
+    }
+
+    [data-theme="light"] {
+      --bg-color: #f1f5f9;
+      --text-color: #1e293b;
+      --accent-color: #b45309;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(180, 83, 9, 0.3);
+      --modal-bg: rgba(255, 255, 255, 0.95);
+      --input-bg: rgba(241, 245, 249, 0.9);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: 'Outfit', sans-serif;
       -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
     body {
-      background-color: #07090e;
+      background-color: var(--bg-color);
       background-image: 
         radial-gradient(ellipse at 50% 15%, rgba(226, 201, 169, 0.18), transparent 60%),
         radial-gradient(circle at 10% 85%, rgba(30, 41, 59, 0.35), transparent 50%),
         radial-gradient(circle at 90% 30%, rgba(15, 23, 42, 0.45), transparent 50%);
       background-attachment: fixed;
-      color: #e2e8f0;
+      color: var(--text-color);
       display: flex;
       justify-content: center;
       min-height: 100vh;
@@ -46,6 +67,27 @@
       position: relative;
       overflow-x: hidden;
     }
+
+    /* --- TOGGLE THEME BUTTON --- */
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--accent-color);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 50;
+      font-size: 18px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .theme-toggle:hover { transform: scale(1.1); }
 
     /* --- SPLASH SCREEN --- */
     #splash-screen {
@@ -113,9 +155,9 @@
       position: absolute;
       width: 2.5px;
       height: 2.5px;
-      background: #e2c9a9;
+      background: var(--accent-color);
       border-radius: 50%;
-      box-shadow: 0 0 6px #e2c9a9;
+      box-shadow: 0 0 6px var(--accent-color);
       opacity: 0.35;
       pointer-events: none;
     }
@@ -153,7 +195,7 @@
       position: absolute;
       inset: -2px;
       border-radius: 50%;
-      background: conic-gradient(from 0deg, transparent 40%, #e2c9a9, #ffffff, transparent 90%);
+      background: conic-gradient(from 0deg, transparent 40%, var(--accent-color), #ffffff, transparent 90%);
       animation: putarHalo 4s linear infinite;
       z-index: 0;
       filter: drop-shadow(0 0 10px rgba(226, 201, 169, 0.8));
@@ -163,7 +205,7 @@
       position: absolute;
       inset: 4px;
       border-radius: 50%;
-      border: 1px dashed rgba(226, 201, 169, 0.5);
+      border: 1px dashed var(--card-border);
       animation: putarHaloReverse 12s linear infinite;
       z-index: 1;
       pointer-events: none;
@@ -174,7 +216,7 @@
       width: 125px;
       height: 125px;
       border-radius: 50%;
-      border: 2.5px solid #080b10;
+      border: 2.5px solid var(--bg-color);
       box-shadow: 0 0 25px rgba(226, 201, 169, 0.4), inset 0 0 12px rgba(0, 0, 0, 0.8);
       object-fit: cover;
       background: #161b22;
@@ -187,7 +229,7 @@
       width: 18px;
       height: 18px;
       background-color: #10b981;
-      border: 3px solid #080b10;
+      border: 3px solid var(--bg-color);
       border-radius: 50%;
       z-index: 3;
       box-shadow: 0 0 10px #10b981;
@@ -209,11 +251,11 @@
       justify-content: center;
       gap: 8px;
       text-transform: uppercase;
-      color: #ffffff;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      color: var(--text-color);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
     .verified-icon {
-      color: #e2c9a9;
+      color: var(--accent-color);
       font-size: 20px;
       filter: drop-shadow(0 0 5px rgba(226, 201, 169, 0.5));
     }
@@ -226,7 +268,8 @@
     }
     .store-bio {
       font-size: 13.5px;
-      color: #cbd5e1;
+      color: var(--text-color);
+      opacity: 0.9;
       margin: 14px 0 12px;
       font-style: italic;
       font-weight: 300;
@@ -245,9 +288,9 @@
       font-weight: 700;
       padding: 6px 18px;
       border-radius: 30px;
-      background: rgba(14, 18, 25, 0.85);
-      border: 1px solid rgba(226, 201, 169, 0.25);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       letter-spacing: 0.5px;
     }
 
@@ -255,17 +298,17 @@
       display: inline-flex;
       justify-content: center;
       gap: 20px;
-      background: rgba(22, 27, 34, 0.7);
+      background: var(--card-bg);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(226, 201, 169, 0.3);
+      border: 1px solid var(--card-border);
       padding: 11px 22px;
       border-radius: 30px;
       font-size: 12.5px;
       color: #94a3b8;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
-    .stats-bar span b { color: #e2c9a9; }
+    .stats-bar span b { color: var(--accent-color); }
 
     /* --- TEKS PROMO BERJALAN --- */
     .promo-marquee {
@@ -273,15 +316,15 @@
       margin-top: 22px;
       overflow: hidden;
       background: rgba(226, 201, 169, 0.05);
-      border-top: 1px solid rgba(226, 201, 169, 0.15);
-      border-bottom: 1px solid rgba(226, 201, 169, 0.15);
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
       padding: 10px 0;
       position: relative;
     }
     .marquee-text {
       display: inline-block;
       white-space: nowrap;
-      color: #e2c9a9;
+      color: var(--accent-color);
       font-size: 13px;
       font-weight: 600;
       letter-spacing: 3px;
@@ -302,11 +345,11 @@
     }
     .action-btn {
       width: 100%;
-      background: rgba(18, 23, 31, 0.75);
+      background: var(--card-bg);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(226, 201, 169, 0.25);
-      color: #f0f6fc;
+      border: 1px solid var(--card-border);
+      color: var(--text-color);
       padding: 16px 22px;
       border-radius: 14px;
       display: flex;
@@ -318,14 +361,14 @@
       text-decoration: none;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       letter-spacing: 0.5px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       position: relative;
       overflow: hidden;
     }
     .action-btn:hover {
-      background: #e2c9a9;
+      background: var(--accent-color);
       color: #0b0e14;
-      border-color: #e2c9a9;
+      border-color: var(--accent-color);
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(226, 201, 169, 0.4);
     }
@@ -341,7 +384,7 @@
     .disclaimer-box {
       margin-top: 30px;
       background: rgba(226, 201, 169, 0.08);
-      border: 1px solid rgba(226, 201, 169, 0.25);
+      border: 1px solid var(--card-border);
       border-radius: 12px;
       padding: 16px 18px;
       text-align: center;
@@ -351,7 +394,7 @@
       width: 100%;
       backdrop-filter: blur(5px);
     }
-    .disclaimer-box b { color: #e2c9a9; }
+    .disclaimer-box b { color: var(--accent-color); }
 
     /* KUTIPAN TOKO */
     .quote-box {
@@ -361,7 +404,7 @@
       padding: 0 10px;
     }
     .quote-title {
-      color: #e2c9a9;
+      color: var(--accent-color);
       font-weight: 800;
       font-size: 13.5px;
       letter-spacing: 2px;
@@ -375,10 +418,28 @@
       margin-bottom: 12px;
       letter-spacing: 0.5px;
     }
-    .quote-line { color: #e2c9a9; letter-spacing: -2px; opacity: 0.4; }
+    .quote-line { color: var(--accent-color); letter-spacing: -2px; opacity: 0.4; }
     .copyright { margin-top: 25px; font-size: 12.5px; color: #6e7681; font-weight: 600; letter-spacing: 1px; }
 
-    /* --- FLOATING WA BUTTON DENGAN SVG RESMI --- */
+    /* --- TOMBOL SHARE WEB --- */
+    .share-web-btn {
+      margin-top: 15px;
+      background: transparent;
+      border: 1px dashed var(--card-border);
+      color: var(--accent-color);
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.2s;
+    }
+    .share-web-btn:hover { background: rgba(226,201,169,0.1); transform: scale(1.05); }
+
+    /* --- FLOATING WA BUTTON --- */
     .float-wa {
       position: fixed;
       bottom: 25px;
@@ -408,21 +469,21 @@
       fill: #ffffff;
     }
 
-    /* --- TOAST NOTIFIKASI SALES (FOMO) --- */
+    /* --- TOAST NOTIFIKASI --- */
     .toast-notification {
       position: fixed;
       bottom: -100px;
       left: 20px;
-      background: rgba(18, 23, 31, 0.92);
+      background: var(--card-bg);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(226, 201, 169, 0.3);
+      border: 1px solid var(--card-border);
       padding: 12px 18px;
       border-radius: 14px;
       display: flex;
       align-items: center;
       gap: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
       z-index: 80;
       transition: bottom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
       opacity: 0;
@@ -439,26 +500,10 @@
       padding: 7px;
       border-radius: 50%;
     }
-    .toast-text {
-      display: flex;
-      flex-direction: column;
-    }
-    .toast-title {
-      color: #e2c9a9;
-      font-size: 12.5px;
-      font-weight: 800;
-      margin-bottom: 2px;
-    }
-    .toast-desc {
-      color: #cbd5e1;
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .toast-time {
-      color: #64748b;
-      font-size: 10.5px;
-      margin-top: 2px;
-    }
+    .toast-text { display: flex; flex-direction: column; }
+    .toast-title { color: var(--accent-color); font-size: 12.5px; font-weight: 800; margin-bottom: 2px; }
+    .toast-desc { color: var(--text-color); font-size: 12px; font-weight: 600; opacity: 0.9; }
+    .toast-time { color: #64748b; font-size: 10.5px; margin-top: 2px; }
 
     /* --- MODAL DRAWER --- */
     .drawer-overlay {
@@ -476,9 +521,9 @@
     .drawer-content {
       width: 100%;
       max-width: 800px;
-      background: rgba(13, 17, 24, 0.9); 
+      background: var(--modal-bg); 
       backdrop-filter: blur(25px) saturate(150%);
-      border: 1px solid rgba(226, 201, 169, 0.35);
+      border: 1px solid var(--card-border);
       border-radius: 20px;
       padding: 26px;
       max-height: 88vh;
@@ -499,12 +544,12 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid rgba(226, 201, 169, 0.2);
+      border-bottom: 1px solid var(--card-border);
       padding-bottom: 16px;
       margin-bottom: 20px;
       position: sticky;
       top: -26px;
-      background: rgba(13, 17, 24, 0.95);
+      background: var(--modal-bg);
       backdrop-filter: blur(10px);
       z-index: 10;
       padding-top: 26px;
@@ -512,7 +557,7 @@
     }
     .drawer-header h3 {
       font-size: 17px;
-      color: #ffffff;
+      color: var(--text-color);
       font-weight: 800;
       letter-spacing: 1px;
       display: flex;
@@ -520,88 +565,69 @@
       gap: 10px;
     }
     .nav-btn { background: none; border: none; color: #94a3b8; font-size: 26px; cursor: pointer; transition: 0.2s; }
-    .nav-btn:hover { color: #e2c9a9; transform: scale(1.15); }
+    .nav-btn:hover { color: var(--accent-color); transform: scale(1.15); }
     .nav-btn:active { transform: scale(0.9); }
 
-    /* LABEL BEST SELLER (HOT) */
+    /* LABEL HOT */
     .hot-label {
-      background: rgba(226, 201, 169, 0.15); border: 1px solid #e2c9a9; color: #e2c9a9;
+      background: rgba(226, 201, 169, 0.15); border: 1px solid var(--accent-color); color: var(--accent-color);
       font-size: 10px; font-weight: 800; padding: 3px 6px; border-radius: 6px;
       margin-left: 8px; vertical-align: middle; letter-spacing: 1px;
-      animation: pulseHot 1.5s infinite alternate;
-    }
-    @keyframes pulseHot {
-      from { box-shadow: 0 0 2px rgba(226, 201, 169, 0.2); }
-      to { box-shadow: 0 0 10px rgba(226, 201, 169, 0.8); }
     }
 
     /* PENCARIAN & KATEGORI */
     .search-box { margin-bottom: 18px; }
     .search-box input {
-      width: 100%; background: rgba(8, 11, 16, 0.7); border: 1px solid rgba(48, 54, 61, 0.8);
-      color: #f0f6fc; padding: 15px 18px; border-radius: 12px; font-size: 14.5px; outline: none; transition: 0.3s;
+      width: 100%; background: var(--input-bg); border: 1px solid var(--card-border);
+      color: var(--text-color); padding: 15px 18px; border-radius: 12px; font-size: 14.5px; outline: none; transition: 0.3s;
     }
-    .search-box input:focus { border-color: #e2c9a9; box-shadow: 0 0 10px rgba(226, 201, 169, 0.2); }
+    .search-box input:focus { border-color: var(--accent-color); box-shadow: 0 0 10px rgba(226, 201, 169, 0.2); }
     .category-chips { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; }
     .category-chips::-webkit-scrollbar { height: 5px; }
     .category-chips::-webkit-scrollbar-thumb { background: rgba(48, 54, 61, 0.5); border-radius: 10px; }
     .chip {
-      background: rgba(8, 11, 16, 0.6); border: 1px solid rgba(48, 54, 61, 0.8); color: #94a3b8;
+      background: var(--input-bg); border: 1px solid var(--card-border); color: #94a3b8;
       padding: 9px 18px; border-radius: 30px; font-size: 12.5px; font-weight: 700; cursor: pointer;
       white-space: nowrap; transition: 0.2s; letter-spacing: 0.5px;
     }
-    .chip:hover { border-color: #e2c9a9; color: #e2c9a9; }
-    .chip:active { transform: scale(0.92); }
-    .chip.active { background: #e2c9a9; color: #0d1117; border-color: #e2c9a9; }
+    .chip:hover { border-color: var(--accent-color); color: var(--accent-color); }
+    .chip.active { background: var(--accent-color); color: #0d1117; border-color: var(--accent-color); }
 
     /* PRODUK LIST */
     .product-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
     .product-item {
       display: flex; justify-content: space-between; align-items: center;
-      background: rgba(18, 23, 31, 0.6); border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 15px 18px; border-radius: 13px; cursor: pointer; color: #f0f6fc;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      padding: 15px 18px; border-radius: 13px; cursor: pointer; color: var(--text-color);
       font-size: 14px; font-weight: 600; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .product-item:hover { border-color: #e2c9a9; background: rgba(28, 35, 48, 0.8); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.5); }
-    .product-item:hover .arrow-icon { color: #e2c9a9; transform: translateX(3px); }
-    .product-item:active { transform: scale(0.97); background: rgba(226, 201, 169, 0.15); box-shadow: 0 0 15px rgba(226, 201, 169, 0.3); }
+    .product-item:hover { border-color: var(--accent-color); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
     .item-left { display: flex; align-items: center; gap: 10px; }
-    .app-logo { width: 24px; height: 24px; border-radius: 6px; object-fit: contain; background: #ffffff; padding: 2px; transition: transform 0.2s; }
-    .product-item:hover .app-logo { transform: scale(1.1); }
+    .app-logo { width: 24px; height: 24px; border-radius: 6px; object-fit: contain; background: #ffffff; padding: 2px; }
     .fav-icon { font-size: 17px; filter: grayscale(100%) opacity(0.3); transition: 0.2s; cursor: pointer; }
-    .fav-icon:hover { transform: scale(1.25); filter: grayscale(50%) opacity(0.8); }
-    .fav-icon.active { filter: none; transform: scale(1.25); text-shadow: 0 0 15px rgba(226, 201, 169, 0.9); }
-    .prod-price { color: #e2c9a9; font-weight: 800; text-align: right; }
+    .fav-icon.active { filter: none; transform: scale(1.25); text-shadow: 0 0 15px var(--accent-color); }
+    .prod-price { color: var(--accent-color); font-weight: 800; text-align: right; }
 
     /* FORM & KETENTUAN */
     .order-form { display: flex; flex-direction: column; gap: 16px; }
     .form-box label { font-size: 13.5px; color: #94a3b8; font-weight: 700; margin-bottom: 8px; display: block; }
     .form-box input, .form-box select {
-      width: 100%; background: rgba(8, 11, 16, 0.7); border: 1px solid rgba(48, 54, 61, 0.8);
-      color: #f0f6fc; padding: 14px 16px; border-radius: 12px; font-size: 14.5px; outline: none; transition: 0.2s;
+      width: 100%; background: var(--input-bg); border: 1px solid var(--card-border);
+      color: var(--text-color); padding: 14px 16px; border-radius: 12px; font-size: 14.5px; outline: none;
     }
-    .form-box input:focus, .form-box select:focus { border-color: #e2c9a9; }
-    
-    .info-note { 
-      font-size: 13px; 
-      color: #e2c9a9; 
-      background: rgba(226, 201, 169, 0.08); 
-      padding: 14px; 
-      border-radius: 10px; 
-      border-left: 4px solid #e2c9a9; 
-      line-height: 1.6; 
-    }
+    .form-box input:focus, .form-box select:focus { border-color: var(--accent-color); }
+    .info-note { font-size: 13px; color: var(--accent-color); background: rgba(226, 201, 169, 0.08); padding: 14px; border-radius: 10px; border-left: 4px solid var(--accent-color); line-height: 1.6; }
     
     .snk-container { display: flex; flex-direction: column; gap: 14px; padding-bottom: 10px; }
-    .snk-box { background: rgba(18, 23, 31, 0.5); border: 1px solid rgba(226, 201, 169, 0.25); border-radius: 14px; padding: 18px; }
-    .snk-title { color: #e2c9a9; font-size: 14.5px; font-weight: 800; letter-spacing: 1px; margin-bottom: 12px; text-align: center; border-bottom: 1px dashed rgba(226, 201, 169, 0.3); padding-bottom: 10px; }
-    .snk-text p { font-size: 13.5px; color: #cbd5e1; line-height: 1.8; margin-bottom: 6px; }
+    .snk-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 18px; }
+    .snk-title { color: var(--accent-color); font-size: 14.5px; font-weight: 800; letter-spacing: 1px; margin-bottom: 12px; text-align: center; border-bottom: 1px dashed var(--card-border); padding-bottom: 10px; }
+    .snk-text p { font-size: 13.5px; color: var(--text-color); opacity: 0.9; line-height: 1.8; margin-bottom: 6px; }
 
     .submit-btn, .copy-btn {
-      background: #e2c9a9; color: #080b10; font-weight: 800; border: none; padding: 16px; border-radius: 12px;
+      background: var(--accent-color); color: #080b10; font-weight: 800; border: none; padding: 16px; border-radius: 12px;
       font-size: 14.5px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1.5px;
     }
-    .submit-btn:hover, .copy-btn:hover { background: #d4b893; box-shadow: 0 0 20px rgba(226, 201, 169, 0.5); }
+    .submit-btn:hover, .copy-btn:hover { opacity: 0.9; box-shadow: 0 0 20px rgba(226, 201, 169, 0.5); }
     .submit-btn:active, .copy-btn:active { transform: scale(0.96); }
 
     .ask-btn {
@@ -609,13 +635,12 @@
       padding: 14px; border-radius: 12px; font-size: 13.5px; font-weight: 700; cursor: pointer;
       transition: 0.3s; text-align: center; margin-top: -4px; width: 100%;
     }
-    .ask-btn:hover { background: rgba(148, 163, 184, 0.1); color: #e2c9a9; border-color: #e2c9a9; }
-    .ask-btn:active { transform: scale(0.96); }
+    .ask-btn:hover { background: rgba(148, 163, 184, 0.1); color: var(--accent-color); border-color: var(--accent-color); }
 
-    /* --- NOTA DIGITAL (RECEIPT) --- */
+    /* --- NOTA DIGITAL DENGAN QUICK COPY --- */
     .receipt-wrapper {
       background: #11141a; border: 1px dashed rgba(226, 201, 169, 0.5); border-radius: 10px;
-      padding: 22px; margin-bottom: 18px; font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+      padding: 22px; margin-bottom: 18px; font-family: 'JetBrains Mono', monospace;
       color: #cbd5e1; position: relative;
     }
     .receipt-header {
@@ -626,11 +651,24 @@
     .receipt-row span:last-child { color: #fff; font-weight: 600; text-align: right; max-width: 60%; }
     .receipt-total {
       margin-top: 14px; padding-top: 14px; border-top: 2px dashed rgba(226, 201, 169, 0.3);
-      color: #e2c9a9; font-weight: 800; font-size: 15px; display: flex; justify-content: space-between;
+      color: #e2c9a9; font-weight: 800; font-size: 15px; display: flex; justify-content: space-between; align-items: center;
     }
+    .copy-pill {
+      background: #e2c9a9; color: #080b10; font-size: 11px; font-weight: 700; padding: 4px 10px;
+      border-radius: 6px; cursor: pointer; border: none; transition: 0.2s;
+    }
+    .copy-pill:hover { background: #fff; }
+
+    /* FAQ STYLING */
+    .faq-item { margin-bottom: 12px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; }
+    .faq-q { font-weight: 700; color: var(--accent-color); font-size: 14px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-a { font-size: 13px; color: var(--text-color); opacity: 0.8; margin-top: 6px; line-height: 1.6; }
   </style>
 </head>
 <body>
+
+  <!-- TOGGLE MODE TERANG / GELAP -->
+  <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Ganti Mode Tampilan">🌙</button>
 
   <!-- LOADING SPLASH SCREEN -->
   <div id="splash-screen">
@@ -640,7 +678,7 @@
 
   <div id="bouncing-container"></div>
 
-  <!-- LIVE SALES TOAST (FOMO POPUP) -->
+  <!-- LIVE SALES TOAST -->
   <div class="toast-notification" id="sales-toast">
     <div class="toast-icon">🛍️</div>
     <div class="toast-text">
@@ -660,10 +698,10 @@
       <div class="store-subtitle">PREMIUM APPS</div>
       <p class="store-bio">"your one-stop premium store. tap menu di bawah untuk order"</p>
       
-      <!-- BADGE STATUS OPERASIONAL MANDIRI -->
+      <!-- BADGE STATUS -->
       <div class="store-badge">
         <span id="badge-status-icon">🟢</span>
-        <span id="badge-status-text" style="color: #e2c9a9;">Memeriksa status toko...</span>
+        <span id="badge-status-text" style="color: var(--accent-color);">Memeriksa status toko...</span>
       </div>
 
       <div class="stats-bar">
@@ -692,6 +730,11 @@
         <span class="arrow-icon">&#10095;</span>
       </button>
 
+      <button class="action-btn" onclick="bukaFaq()">
+        <span class="btn-label">❓ FAQ / TANYA JAWAB</span>
+        <span class="arrow-icon">&#10095;</span>
+      </button>
+
       <a class="action-btn" href="https://t.me/jejakbeli" target="_blank">
         <span class="btn-label">📢 TESTIMONI</span>
         <span class="arrow-icon">&#10095;</span>
@@ -702,6 +745,11 @@
         <span class="arrow-icon">&#10095;</span>
       </button>
     </div>
+
+    <!-- Tombol Bagikan Toko -->
+    <button class="share-web-btn" onclick="bagikanToko()">
+      🔗 Bagikan Tautan Toko Ini
+    </button>
 
     <div class="disclaimer-box">
       ⚠️ <b>Informasi:</b> Website ini merupakan <b>Katalog Pintar</b> untuk mempermudah pelanggan mengecek harga dan detail paket favorit, <b>bukan</b> sistem auto-order otomatis. Seluruh proses pembayaran dan transaksi tetap dilakukan dengan aman melalui WhatsApp Admin.
@@ -718,7 +766,7 @@
     </footer>
   </div>
 
-  <!-- TOMBOL WHATSAPP RESMI MELAYANG -->
+  <!-- TOMBOL WHATSAPP MELAYANG -->
   <a href="https://wa.me/62895325627342?text=Halo%20Admin,%20saya%20mau%20tanya%20layanan" target="_blank" class="float-wa" title="Hubungi WhatsApp Admin">
     <svg viewBox="0 0 24 24">
       <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
@@ -760,12 +808,12 @@
         </div>
         
         <div style="display: flex; justify-content: center; margin-top: -10px; margin-bottom: 20px;">
-          <button class="chip" onclick="bukaInfoAplikasi()" style="border-color: #e2c9a9; color: #e2c9a9; background: rgba(226, 201, 169, 0.1);">
+          <button class="chip" onclick="bukaInfoAplikasi()" style="border-color: var(--accent-color); color: var(--accent-color); background: rgba(226, 201, 169, 0.1);">
             ℹ️ Info & Penjelasan Aplikasi
           </button>
         </div>
 
-        <div style="font-size: 13.5px; color: #cbd5e1; background: rgba(226, 201, 169, 0.08); border: 1px dashed rgba(226, 201, 169, 0.4); padding: 14px 18px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px;">
+        <div style="font-size: 13.5px; color: var(--text-color); opacity: 0.9; background: rgba(226, 201, 169, 0.08); border: 1px dashed var(--card-border); padding: 14px 18px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px;">
           🐺 <b>Tips Favorit:</b> Klik ikon serigala untuk menandai aplikasi andalan kamu sebelum order!
         </div>
 
@@ -781,14 +829,13 @@
         </div>
 
         <form class="order-form" onsubmit="bukaNotaDigital(event)">
-          <!-- NOTE ESTIMASI PENGERJAAN & AKUN -->
           <div class="info-note" id="form-note">
             ⚡ <b>Estimasi Pengerjaan:</b> 1 – 15 menit (no rush order). Konfirmasi jenis akun (Seller/Buyer) bisa dibicarakan di WhatsApp ya.
           </div>
 
           <div class="form-box">
             <label>Paket yang Dipilih</label>
-            <input type="text" id="input-item" readonly style="color: #e2c9a9; border-color: rgba(226, 201, 169, 0.4); background: rgba(0,0,0,0.2); font-weight: 700;">
+            <input type="text" id="input-item" readonly style="color: var(--accent-color); border-color: var(--card-border); background: rgba(0,0,0,0.2); font-weight: 700;">
           </div>
           <div class="form-box">
             <label>Nomor WhatsApp Anda</label>
@@ -817,7 +864,7 @@
         </form>
       </div>
 
-      <!-- VIEW NOTA (WEB ONLY) -->
+      <!-- VIEW NOTA (DENGAN QUICK COPY) -->
       <div id="view-nota" class="view-panel" style="display: none;">
         <div class="drawer-header">
           <button class="nav-btn" onclick="gantiView('view-form')">&#10094;</button>
@@ -839,6 +886,7 @@
           
           <div class="receipt-total">
             <span>Metode Bayar:</span> <span id="nota-pay"></span>
+            <button class="copy-pill" onclick="salinInfoBayar()">📋 Salin Info</button>
           </div>
         </div>
 
@@ -853,15 +901,44 @@
           <h3>💬 HUBUNGI ADMIN</h3>
           <button class="nav-btn" onclick="tutupSemua()">&times;</button>
         </div>
-        <div class="content-list">
-          <a class="action-btn" href="https://wa.me/62895325627342?text=Halo%20Admin,%20saya%20mau%20tanya%20layanan" target="_blank" style="background: rgba(8, 11, 16, 0.5);">
+        <div class="content-list" style="display:flex; flex-direction:column; gap:12px;">
+          <a class="action-btn" href="https://wa.me/62895325627342?text=Halo%20Admin,%20saya%20mau%20tanya%20layanan" target="_blank">
             <span class="btn-label" style="font-size: 15px;">📱 WhatsApp Admin Utama</span>
             <span class="arrow-icon">&#10095;</span>
           </a>
-          <a class="action-btn" href="https://x.com/klebuss" target="_blank" style="background: rgba(8, 11, 16, 0.5);">
+          <button class="action-btn" onclick="salinNoWA()" style="background:var(--input-bg);">
+            <span class="btn-label" style="font-size: 15px;">📋 Salin Nomor WA (0895325627342)</span>
+          </button>
+          <a class="action-btn" href="https://x.com/klebuss" target="_blank">
             <span class="btn-label" style="font-size: 15px;">𝕏 Akun X (Twitter)</span>
             <span class="arrow-icon">&#10095;</span>
           </a>
+        </div>
+      </div>
+
+      <!-- VIEW FAQ -->
+      <div id="view-faq" class="view-panel" style="display: none;">
+        <div class="drawer-header">
+          <h3>❓ PERTANYAAN UMUM (FAQ)</h3>
+          <button class="nav-btn" onclick="tutupSemua()">&times;</button>
+        </div>
+        <div class="snk-box">
+          <div class="faq-item">
+            <div class="faq-q">Q: Berapa lama proses pesanan setelah transfer?</div>
+            <div class="faq-a">A: Estimasi normal 1 sampai 15 menit tergantung antrean. Mohon bersabar dan dilarang spam (no rush order).</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Q: Apakah ada garansi jika akun bermasalah?</div>
+            <div class="faq-a">A: Tentu! Garansi diberikan penuh sesuai durasi paket yang kamu beli (max klaim 3x24 jam dengan syarat kirim screenshot kendala).</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Q: Bagaimana cara pembayarannya?</div>
+            <div class="faq-a">A: Pembayaran bisa melalui QRIS All Payment, SeaBank, atau GoPay. Silakan cek detailnya saat checkout nota digital.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Q: Apakah bisa untuk perpanjangan (renewal)?</div>
+            <div class="faq-a">A: Bisa banget, cukup konfirmasikan ke admin saat chat WhatsApp.</div>
+          </div>
         </div>
       </div>
 
@@ -888,7 +965,7 @@
           <div class="snk-box" style="position: relative;">
             <div class="snk-title">✦ KLAIM GARANSI</div>
             <div class="snk-text">
-              <p style="color: #e2c9a9; text-align: center; margin-bottom: 8px; font-weight: 700;">☆ ✪ FORMAT KLAIM GARANSI ✪</p>
+              <p style="color: var(--accent-color); text-align: center; margin-bottom: 8px; font-weight: 700;">☆ ✪ FORMAT KLAIM GARANSI ✪</p>
               <p>ミ Nama aplikasi : </p>
               <p>ミ Email: </p>
               <p>ミ Password:</p>
@@ -899,7 +976,7 @@
               <p>ミ Durasi order: </p>
               <p>ミ Sisa hari:</p>
               <br>
-              <p style="color: #e2c9a9; margin-bottom: 4px; font-weight: 700;">Syarat klaim:</p>
+              <p style="color: var(--accent-color); margin-bottom: 4px; font-weight: 700;">Syarat klaim:</p>
               <p>❖ Tolong double cek akunnya terlebih dahulu sebelum report.</p>
               <p>❖ Wajib send ss problem.</p>
               <p>❖ Mohon tunggu sesuai estimasi, dilarang buru-buru atau garansi hangus.</p>
@@ -921,7 +998,7 @@
           <button class="nav-btn" onclick="tutupSemua()">&times;</button>
         </div>
         <div class="snk-box">
-          <div class="snk-text" id="desc-app-info" style="color: #e2e8f0; line-height: 1.8;">
+          <div class="snk-text" id="desc-app-info" style="line-height: 1.8;">
             Penjelasan detail aplikasi akan muncul di sini.
           </div>
         </div>
@@ -931,7 +1008,43 @@
   </div>
 
   <script>
-    // --- SPLASH SCREEN LOGIC ---
+    // --- DARK / LIGHT MODE TOGGLE ---
+    function toggleTheme() {
+      const html = document.documentElement;
+      const btn = document.getElementById("theme-btn");
+      if (html.getAttribute("data-theme") === "light") {
+        html.removeAttribute("data-theme");
+        btn.innerText = "🌙";
+        localStorage.setItem("theme", "dark");
+      } else {
+        html.setAttribute("data-theme", "light");
+        btn.innerText = "☀️";
+        localStorage.setItem("theme", "light");
+      }
+    }
+    // Load saved theme
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+      document.getElementById("theme-btn").innerText = "☀️";
+    }
+
+    // --- QUICK COPY & SHARE API ---
+    function salinInfoBayar() {
+      const textToCopy = `Order ID: ${document.getElementById("nota-id").innerText}\nProduk: ${pApp} - ${pNamaPaket}\nHarga: ${pHarga}\nMetode Bayar: ${document.getElementById("nota-pay").innerText}`;
+      navigator.clipboard.writeText(textToCopy).then(() => { alert("Detail nota berhasil disalin ke clipboard!"); });
+    }
+    function salinNoWA() {
+      navigator.clipboard.writeText("0895325627342").then(() => { alert("Nomor WhatsApp berhasil disalin!"); });
+    }
+    function bagikanToko() {
+      if (navigator.share) {
+        navigator.share({ title: 'REGARM-MART', text: 'Pusat aplikasi premium bergaransi & terpercaya!', url: window.location.href }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(window.location.href).then(() => { alert("Link toko berhasil disalin!"); });
+      }
+    }
+
+    // --- SPLASH SCREEN ---
     window.addEventListener('load', () => {
       setTimeout(() => {
         const splash = document.getElementById('splash-screen');
@@ -940,7 +1053,7 @@
       }, 1200);
     });
 
-    // --- ANIMASI ELEMEN MEMANTUL ---
+    // --- ANIMASI MEMANTUL ---
     const bgContainer = document.getElementById("bouncing-container");
     const bounceItems = [];
     for (let i = 0; i < 8; i++) {
@@ -980,21 +1093,16 @@
     }
     requestAnimationFrame(animate);
 
-    // --- LOGIKA JAM KERJA OTOMATIS (10.00 - 00.30 WIB) ---
+    // --- LOGIKA JAM OPERASIONAL WIB ---
     function checkJamOperasional() {
       const wibStr = new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta" });
       const wibDate = new Date(wibStr);
-      
       const jam = wibDate.getHours();
       const menit = wibDate.getMinutes();
 
-      // Buka jika: jam 10.00 - 23.59 ATAU jam 00.00 - 00.30
       let isBuka = false;
-      if (jam >= 10 && jam <= 23) {
-        isBuka = true;
-      } else if (jam === 0 && menit <= 30) {
-        isBuka = true;
-      }
+      if (jam >= 10 && jam <= 23) { isBuka = true; } 
+      else if (jam === 0 && menit <= 30) { isBuka = true; }
 
       const headerDot = document.getElementById("header-status-dot");
       const badgeIcon = document.getElementById("badge-status-icon");
@@ -1019,8 +1127,8 @@
     checkJamOperasional();
     setInterval(checkJamOperasional, 30000);
 
-    // --- POPUP NOTIFIKASI SALES (FOMO) ---
-    const toastKota = ["Jakarta", "Surabaya", "Bandung", "Medan", "Makassar", "Bali", "Semarang", "Yogyakarta", "Kalimantan", "Sumatera", "Sulawesi", "Bekasi", "Depok", "Nusa Tenggara Timur", "Papua", "Lombok", "Inggris", "Spanyol", "Malaysia", "Singapore"];
+    // --- TOAST NOTIFIKASI FOMO ---
+    const toastKota = ["Jakarta", "Surabaya", "Bandung", "Medan", "Makassar", "Bali", "Semarang", "Yogyakarta", "Kalimantan", "Sumatera", "Sulawesi", "Bekasi", "Depok", "Papua", "Lombok", "Malaysia", "Singapore"];
     const toastProduk = ["Netflix 1 Bulan", "Spotify Famplan", "Canva 1 Tahun", "Netflix 7 Hari", "Canva 5 Hari", "Zoom 3 Bulan", "Claude 7 Hari", "YouTube Premium", "Capcut Private", "Viu 1 Tahun", "ChatGPT Plus"];
     
     function showRandomToast() {
@@ -1151,6 +1259,7 @@
     function tutupSemua() { document.getElementById("drawer-modal").style.display = "none"; }
     function tutupLuar(e) { if (e.target.id === "drawer-modal") tutupSemua(); }
     function bukaKontak() { document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-contact"); }
+    function bukaFaq() { document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-faq"); }
     function bukaSnK() { document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-snk"); }
     function bukaKatalogUtama() { document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-pricelist-utama"); renderAplikasi(""); }
 
