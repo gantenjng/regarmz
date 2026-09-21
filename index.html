@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Apps | REGARM-MART</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Outfit', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: #07090e;
+      background-image: 
+        radial-gradient(ellipse at 50% 15%, rgba(226, 201, 169, 0.18), transparent 60%),
+        radial-gradient(circle at 10% 85%, rgba(30, 41, 59, 0.35), transparent 50%),
+        radial-gradient(circle at 90% 30%, rgba(15, 23, 42, 0.45), transparent 50%);
+      background-attachment: fixed;
+      color: #e2e8f0;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* --- SPLASH SCREEN --- */
+    #splash-screen {
+      position: fixed;
+      inset: 0;
+      background-color: #05070a;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    .splash-logo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 2px solid #e2c9a9;
+      box-shadow: 0 0 30px rgba(226, 201, 169, 0.4);
+      object-fit: cover;
+      animation: pulseSplash 1.5s infinite alternate;
+    }
+    .splash-text {
+      margin-top: 20px;
+      color: #e2c9a9;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 5px;
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes pulseSplash {
+      from { transform: scale(0.95); box-shadow: 0 0 10px rgba(226, 201, 169, 0.2); }
+      to { transform: scale(1.05); box-shadow: 0 0 40px rgba(226, 201, 169, 0.8); }
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* --- BACKGROUND ELEMEN MEMANTUL --- */
+    #bouncing-container {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .bounce-img {
+      position: absolute;
+      width: 62px;
+      height: 62px;
+      object-fit: cover;
+      border-radius: 50%;
+      opacity: 0.22; 
+      filter: grayscale(20%);
+      box-shadow: 0 0 15px rgba(226, 201, 169, 0.25);
+      border: 1px solid rgba(226, 201, 169, 0.35);
+      background-color: #161b22;
+    }
+    .bounce-icon {
+      position: absolute;
+      font-size: 30px;
+      opacity: 0.20;
+      filter: drop-shadow(0 0 8px rgba(226, 201, 169, 0.4));
+      user-select: none;
+    }
+    .ember {
+      position: absolute;
+      width: 2.5px;
+      height: 2.5px;
+      background: #e2c9a9;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #e2c9a9;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    /* --- LAYOUT UTAMA --- */
+    .app-container {
+      width: 100%;
+      max-width: 1000px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .profile-section {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    /* BINGKAI PROFIL DINAMIS */
+    .avatar-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 6px;
+      border-radius: 50%;
+    }
+    .avatar-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 40%, #e2c9a9, #ffffff, transparent 90%);
+      animation: putarHalo 4s linear infinite;
+      z-index: 0;
+      filter: drop-shadow(0 0 10px rgba(226, 201, 169, 0.8));
+    }
+    .avatar-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px dashed rgba(226, 201, 169, 0.5);
+      animation: putarHaloReverse 12s linear infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .avatar {
+      position: relative;
+      z-index: 2;
+      width: 125px;
+      height: 125px;
+      border-radius: 50%;
+      border: 2.5px solid #080b10;
+      box-shadow: 0 0 25px rgba(226, 201, 169, 0.4), inset 0 0 12px rgba(0, 0, 0, 0.8);
+      object-fit: cover;
+      background: #161b22;
+      display: block;
+    }
+    .status-dot {
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      width: 18px;
+      height: 18px;
+      background-color: #10b981;
+      border: 3px solid #080b10;
+      border-radius: 50%;
+      z-index: 3;
+      box-shadow: 0 0 10px #10b981;
+    }
+    @keyframes putarHalo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes putarHaloReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+
+    .store-title {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .verified-icon {
+      color: #e2c9a9;
+      font-size: 20px;
+      filter: drop-shadow(0 0 5px rgba(226, 201, 169, 0.5));
+    }
+    .store-subtitle {
+      font-size: 15px;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-top: 6px;
+      letter-spacing: 5px;
+    }
+    .store-bio {
+      font-size: 14px;
+      color: #cbd5e1;
+      margin: 16px 0 24px;
+      font-style: italic;
+      font-weight: 300;
+    }
+    .stats-bar {
+      display: inline-flex;
+      justify-content: center;
+      gap: 25px;
+      background: rgba(22, 27, 34, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(226, 201, 169, 0.3);
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 13px;
+      color: #94a3b8;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    .stats-bar span b { color: #e2c9a9; }
+
+    /* --- TEKS PROMO BERJALAN --- */
+    .promo-marquee {
+      width: 100%;
+      margin-top: 25px;
+      overflow: hidden;
+      background: rgba(226, 201, 169, 0.05);
+      border-top: 1px solid rgba(226, 201, 169, 0.15);
+      border-bottom: 1px solid rgba(226, 201, 169, 0.15);
+      padding: 10px 0;
+      position: relative;
+    }
+    .marquee-text {
+      display: inline-block;
+      white-space: nowrap;
+      color: #e2c9a9;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      animation: scrollMarquee 20s linear infinite;
+    }
+    @keyframes scrollMarquee {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+
+    /* --- MENU UTAMA --- */
+    .menu-group {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      margin-top: 25px;
+    }
+    .action-btn {
+      width: 100%;
+      background: rgba(18, 23, 31, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(226, 201, 169, 0.25);
+      color: #f0f6fc;
+      padding: 18px 24px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .action-btn:hover {
+      background: #e2c9a9;
+      color: #0b0e14;
+      border-color: #e2c9a9;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(226, 201, 169, 0.4);
+    }
+    .action-btn:hover .arrow-icon { color: #0b0e14; transform: translateX(4px); }
+    .action-btn:active {
+      transform: scale(0.96) translateY(0);
+      box-shadow: 0 2px 10px rgba(226, 201, 169, 0.6);
+      transition: transform 0.08s ease;
+    }
+    .btn-label { display: flex; align-items: center; gap: 12px; }
+    .arrow-icon { font-size: 14px; color: #94a3b8; transition: 0.25s; }
+
+    .disclaimer-box {
+      margin-top: 35px;
+      background: rgba(226, 201, 169, 0.08);
+      border: 1px solid rgba(226, 201, 169, 0.25);
+      border-radius: 12px;
+      padding: 16px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.6;
+      width: 100%;
+      max-width: 800px;
+      backdrop-filter: blur(5px);
+    }
+    .disclaimer-box b { color: #e2c9a9; }
+
+    /* KUTIPAN TOKO */
+    .quote-box {
+      margin-top: 25px;
+      text-align: center;
+      width: 100%;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    .quote-title {
+      color: #e2c9a9;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .quote-text {
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+    .quote-line { color: #e2c9a9; letter-spacing: -2px; opacity: 0.4; }
+    .copyright { margin-top: 30px; font-size: 13px; color: #6e7681; font-weight: 600; letter-spacing: 1px; }
+
+    /* --- FLOATING WA BUTTON --- */
+    .float-wa {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      background: rgba(18, 23, 31, 0.85);
+      backdrop-filter: blur(10px);
+      border: 2px solid #e2c9a9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 90;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(226, 201, 169, 0.4);
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+    .float-wa:hover {
+      transform: scale(1.1) rotate(-10deg);
+      background: #e2c9a9;
+      box-shadow: 0 10px 25px rgba(226, 201, 169, 0.6);
+    }
+    .float-wa span { font-size: 30px; }
+
+    /* --- TOAST NOTIFIKASI SALES (POP-UP FOMO) --- */
+    .toast-notification {
+      position: fixed;
+      bottom: -100px;
+      left: 25px;
+      background: rgba(18, 23, 31, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(226, 201, 169, 0.3);
+      padding: 14px 20px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      z-index: 80;
+      transition: bottom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .toast-notification.show {
+      bottom: 25px;
+      opacity: 1;
+    }
+    .toast-icon {
+      font-size: 24px;
+      background: rgba(226, 201, 169, 0.15);
+      padding: 8px;
+      border-radius: 50%;
+    }
+    .toast-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .toast-title {
+      color: #e2c9a9;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+    .toast-desc {
+      color: #cbd5e1;
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+    .toast-time {
+      color: #64748b;
+      font-size: 11px;
+      margin-top: 3px;
+    }
+
+    /* --- MODAL DRAWER --- */
+    .drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 4, 8, 0.82);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 99;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .drawer-content {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(13, 17, 24, 0.88); 
+      backdrop-filter: blur(25px) saturate(150%);
+      border: 1px solid rgba(226, 201, 169, 0.35);
+      border-radius: 20px;
+      padding: 30px;
+      max-height: 88vh;
+      overflow-y: auto;
+      box-sizing: border-box;
+      animation: modalFadeIn 0.3s ease-out;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.85);
+    }
+    .drawer-content::-webkit-scrollbar { width: 8px; }
+    .drawer-content::-webkit-scrollbar-thumb { background: rgba(226, 201, 169, 0.5); border-radius: 10px; }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(226, 201, 169, 0.2);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      position: sticky;
+      top: -30px;
+      background: rgba(13, 17, 24, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+      padding-top: 30px;
+      margin-top: -30px;
+    }
+    .drawer-header h3 {
+      font-size: 18px;
+      color: #ffffff;
+      font-weight: 800;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-btn { background: none; border: none; color: #94a3b8; font-size: 26px; cursor: pointer; transition: 0.2s; }
+    .nav-btn:hover { color: #e2c9a9; transform: scale(1.15); }
+    .nav-btn:active { transform: scale(0.9); }
+
+    /* LABEL BEST SELLER (HOT) */
+    .hot-label {
+      background: rgba(226, 201, 169, 0.15); border: 1px solid #e2c9a9; color: #e2c9a9;
+      font-size: 10px; font-weight: 800; padding: 3px 6px; border-radius: 6px;
+      margin-left: 10px; vertical-align: middle; letter-spacing: 1px;
+      animation: pulseHot 1.5s infinite alternate;
+    }
+    @keyframes pulseHot {
+      from { box-shadow: 0 0 2px rgba(226, 201, 169, 0.2); }
+      to { box-shadow: 0 0 10px rgba(226, 201, 169, 0.8); }
+    }
+
+    /* PENCARIAN & KATEGORI */
+    .search-box { margin-bottom: 20px; }
+    .search-box input {
+      width: 100%; background: rgba(8, 11, 16, 0.7); border: 1px solid rgba(48, 54, 61, 0.8);
+      color: #f0f6fc; padding: 16px 20px; border-radius: 12px; font-size: 15px; outline: none; transition: 0.3s;
+    }
+    .search-box input:focus { border-color: #e2c9a9; box-shadow: 0 0 10px rgba(226, 201, 169, 0.2); }
+    .category-chips { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 15px; }
+    .category-chips::-webkit-scrollbar { height: 6px; }
+    .category-chips::-webkit-scrollbar-thumb { background: rgba(48, 54, 61, 0.5); border-radius: 10px; }
+    .chip {
+      background: rgba(8, 11, 16, 0.6); border: 1px solid rgba(48, 54, 61, 0.8); color: #94a3b8;
+      padding: 10px 22px; border-radius: 30px; font-size: 13px; font-weight: 700; cursor: pointer;
+      white-space: nowrap; transition: 0.2s; letter-spacing: 0.5px;
+    }
+    .chip:hover { border-color: #e2c9a9; color: #e2c9a9; }
+    .chip:active { transform: scale(0.92); }
+    .chip.active { background: #e2c9a9; color: #0d1117; border-color: #e2c9a9; }
+
+    /* PRODUK LIST */
+    .product-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 15px; }
+    .product-item {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(18, 23, 31, 0.6); border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 16px 20px; border-radius: 14px; cursor: pointer; color: #f0f6fc;
+      font-size: 14.5px; font-weight: 600; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .product-item:hover { border-color: #e2c9a9; background: rgba(28, 35, 48, 0.8); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.5); }
+    .product-item:hover .arrow-icon { color: #e2c9a9; transform: translateX(3px); }
+    .product-item:active { transform: scale(0.97); background: rgba(226, 201, 169, 0.15); box-shadow: 0 0 15px rgba(226, 201, 169, 0.3); }
+    .item-left { display: flex; align-items: center; gap: 12px; }
+    .app-logo { width: 24px; height: 24px; border-radius: 6px; object-fit: contain; background: #ffffff; padding: 2px; transition: transform 0.2s; }
+    .product-item:hover .app-logo { transform: scale(1.1); }
+    .fav-icon { font-size: 18px; filter: grayscale(100%) opacity(0.3); transition: 0.2s; cursor: pointer; }
+    .fav-icon:hover { transform: scale(1.25); filter: grayscale(50%) opacity(0.8); }
+    .fav-icon.active { filter: none; transform: scale(1.25); text-shadow: 0 0 15px rgba(226, 201, 169, 0.9); }
+    .prod-price { color: #e2c9a9; font-weight: 800; text-align: right; }
+
+    /* FORM & KETENTUAN */
+    .order-form { display: flex; flex-direction: column; gap: 18px; }
+    .form-box label { font-size: 14px; color: #94a3b8; font-weight: 700; margin-bottom: 8px; display: block; }
+    .form-box input, .form-box select {
+      width: 100%; background: rgba(8, 11, 16, 0.7); border: 1px solid rgba(48, 54, 61, 0.8);
+      color: #f0f6fc; padding: 15px 18px; border-radius: 12px; font-size: 15px; outline: none; transition: 0.2s;
+    }
+    .form-box input:focus, .form-box select:focus { border-color: #e2c9a9; }
+    .info-note { font-size: 13.5px; color: #e2c9a9; background: rgba(226, 201, 169, 0.08); padding: 15px; border-radius: 10px; border-left: 4px solid #e2c9a9; line-height: 1.6; }
+    
+    .snk-container { display: flex; flex-direction: column; gap: 15px; padding-bottom: 10px; }
+    .snk-box { background: rgba(18, 23, 31, 0.5); border: 1px solid rgba(226, 201, 169, 0.25); border-radius: 14px; padding: 20px; }
+    .snk-title { color: #e2c9a9; font-size: 15px; font-weight: 800; letter-spacing: 1px; margin-bottom: 14px; text-align: center; border-bottom: 1px dashed rgba(226, 201, 169, 0.3); padding-bottom: 10px; }
+    .snk-text p { font-size: 14px; color: #cbd5e1; line-height: 1.8; margin-bottom: 6px; }
+
+    .submit-btn, .copy-btn {
+      background: #e2c9a9; color: #080b10; font-weight: 800; border: none; padding: 18px; border-radius: 12px;
+      font-size: 15px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1.5px;
+    }
+    .submit-btn:hover, .copy-btn:hover { background: #d4b893; box-shadow: 0 0 20px rgba(226, 201, 169, 0.5); }
+    .submit-btn:active, .copy-btn:active { transform: scale(0.96); }
+
+    .ask-btn {
+      background: transparent; color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 15px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer;
+      transition: 0.3s; text-align: center; margin-top: -5px; width: 100%;
+    }
+    .ask-btn:hover { background: rgba(148, 163, 184, 0.1); color: #e2c9a9; border-color: #e2c9a9; }
+    .ask-btn:active { transform: scale(0.96); }
+
+    /* --- NOTA DIGITAL (RECEIPT) --- */
+    .receipt-wrapper {
+      background: #11141a; border: 1px dashed rgba(226, 201, 169, 0.5); border-radius: 10px;
+      padding: 25px; margin-bottom: 20px; font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+      color: #cbd5e1; position: relative;
+    }
+    .receipt-header {
+      text-align: center; font-weight: 700; color: #e2c9a9; font-size: 18px;
+      margin-bottom: 15px; border-bottom: 2px dashed rgba(226, 201, 169, 0.3); padding-bottom: 10px;
+    }
+    .receipt-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; }
+    .receipt-row span:last-child { color: #fff; font-weight: 600; text-align: right; max-width: 60%; }
+    .receipt-total {
+      margin-top: 15px; padding-top: 15px; border-top: 2px dashed rgba(226, 201, 169, 0.3);
+      color: #e2c9a9; font-weight: 800; font-size: 16px; display: flex; justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOADING SPLASH SCREEN -->
+  <div id="splash-screen">
+    <img class="splash-logo" src="ava.png" alt="Loading" onerror="this.style.display='none'">
+    <div class="splash-text">REGARM-MART</div>
+  </div>
+
+  <div id="bouncing-container"></div>
+
+  <!-- LIVE SALES TOAST (FOMO POPUP) -->
+  <div class="toast-notification" id="sales-toast">
+    <div class="toast-icon">🛍️</div>
+    <div class="toast-text">
+      <span class="toast-title" id="toast-buyer">Seseorang di Jakarta</span>
+      <span class="toast-desc" id="toast-product">Baru saja order Canva 1 Tahun</span>
+      <span class="toast-time" id="toast-time">Beberapa detik yang lalu</span>
+    </div>
+  </div>
+
+  <div class="app-container">
+    <div class="profile-section">
+      <div class="avatar-wrap">
+        <img class="avatar" src="ava.png" alt="ZAY Profile" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=REGARM'">
+        <span class="status-dot" title="Toko Sedang Buka"></span>
+      </div>
+      <div class="store-title">REGARM-MART <span class="verified-icon">✦</span></div>
+      <div class="store-subtitle">PREMIUM APPS</div>
+      <p class="store-bio">"Providing cheap, trusted, and fully guaranteed premium apps since 2023 ⚡"</p>
+      
+      <div class="stats-bar">
+        <span>⭐ <b>4.9/5.0</b> Rating</span>
+        <span>⚡ <b>Instant</b> Proses</span>
+        <span>🛡️ <b>Garansi</b> 100%</span>
+      </div>
+    </div>
+
+    <!-- Teks Promo Berjalan Lama -->
+    <div class="promo-marquee">
+      <span class="marquee-text">
+        ✦ NANTIKAN PENAWARAN EKSKLUSIF REGARM-MART ✧ QUALITY GUARANTEED ✦ STAY TUNED FOR MORE UPDATES ✧ PROSES CEPAT AMAN ✦
+      </span>
+    </div>
+
+    <!-- Menu Utama -->
+    <div class="menu-group">
+      <button class="action-btn" onclick="bukaKatalogUtama()">
+        <span class="btn-label">✦ KATALOG APLIKASI PREMIUM</span>
+        <span class="arrow-icon">&#10095;</span>
+      </button>
+
+      <button class="action-btn" onclick="bukaKontak()">
+        <span class="btn-label">💬 CONTACT PERSON</span>
+        <span class="arrow-icon">&#10095;</span>
+      </button>
+
+      <a class="action-btn" href="https://t.me/jejakbeli" target="_blank">
+        <span class="btn-label">📢 TESTIMONI</span>
+        <span class="arrow-icon">&#10095;</span>
+      </a>
+
+      <button class="action-btn" onclick="bukaSnK()">
+        <span class="btn-label">🛡️ KETENTUAN & KLAIM GARANSI</span>
+        <span class="arrow-icon">&#10095;</span>
+      </button>
+    </div>
+
+    <div class="disclaimer-box">
+      ⚠️ <b>Informasi:</b> Website ini merupakan <b>Katalog Pintar</b> untuk mempermudah pelanggan mengecek harga dan detail paket favorit, <b>bukan</b> sistem auto-order otomatis. Seluruh proses pembayaran dan transaksi tetap dilakukan dengan aman melalui WhatsApp Admin.
+    </div>
+
+    <div class="quote-box">
+      <div class="quote-title">"REGARM-MART" : ──</div>
+      <div class="quote-text">this is an outlet owned by @ZAY so buyers ask for your attitude, if your attitude is good, our attitude is also very good. please be wise when shopping.</div>
+      <div class="quote-line">──────────────────</div>
+    </div>
+
+    <footer class="copyright">
+      &copy; 2026 ZAY. All Rights Reserved.
+    </footer>
+  </div>
+
+  <!-- Tombol WA Melayang -->
+  <a href="https://wa.me/62895325627342?text=Halo%20Admin,%20saya%20mau%20tanya%20layanan" target="_blank" class="float-wa">
+    <span>📞</span>
+  </a>
+
+  <!-- MODAL DRAWER -->
+  <div id="drawer-modal" class="drawer-overlay" onclick="tutupLuar(event)">
+    <div class="drawer-content">
+
+      <!-- VIEW 1: KATALOG UTAMA -->
+      <div id="view-pricelist-utama" class="view-panel">
+        <div class="drawer-header">
+          <h3>✦ PREMIUM APPS PRICELIST</h3>
+          <button class="nav-btn" onclick="tutupSemua()">&times;</button>
+        </div>
+
+        <div class="search-box">
+          <input type="text" id="search-app" placeholder="Cari aplikasi premium favoritmu..." oninput="filterAplikasi()">
+        </div>
+
+        <div class="category-chips">
+          <button class="chip active" onclick="setKategori('Semua', this)">SEMUA</button>
+          <button class="chip" onclick="setKategori('Streaming & Music', this)">STREAMING & MUSIC</button>
+          <button class="chip" onclick="setKategori('Editing', this)">EDITING</button>
+          <button class="chip" onclick="setKategori('Education', this)">EDUCATION</button>
+          <button class="chip" onclick="setKategori('Other', this)">OTHER</button>
+        </div>
+
+        <div class="product-list" id="box-all-apps"></div>
+      </div>
+
+      <!-- VIEW 2: PILIHAN PAKET -->
+      <div id="view-paket" class="view-panel" style="display: none;">
+        <div class="drawer-header">
+          <button class="nav-btn" onclick="gantiView('view-pricelist-utama')">&#10094;</button>
+          <h3 id="label-aplikasi">DAFTAR PAKET</h3>
+          <button class="nav-btn" onclick="tutupSemua()">&times;</button>
+        </div>
+        
+        <div style="display: flex; justify-content: center; margin-top: -10px; margin-bottom: 20px;">
+          <button class="chip" onclick="bukaInfoAplikasi()" style="border-color: #e2c9a9; color: #e2c9a9; background: rgba(226, 201, 169, 0.1);">
+            ℹ️ Info & Penjelasan Aplikasi
+          </button>
+        </div>
+
+        <div style="font-size: 14px; color: #cbd5e1; background: rgba(226, 201, 169, 0.08); border: 1px dashed rgba(226, 201, 169, 0.4); padding: 14px 18px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px;">
+          🐺 <b>Tips Favorit:</b> Klik ikon serigala untuk menandai aplikasi andalan kamu sebelum order!
+        </div>
+
+        <div class="product-list" id="daftar-paket-box"></div>
+      </div>
+
+      <!-- VIEW 3: FORMULIR -->
+      <div id="view-form" class="view-panel" style="display: none;">
+        <div class="drawer-header">
+          <button class="nav-btn" onclick="gantiView('view-paket')">&#10094;</button>
+          <h3>✦ FORM PEMESANAN</h3>
+          <button class="nav-btn" onclick="tutupSemua()">&times;</button>
+        </div>
+
+        <form class="order-form" onsubmit="bukaNotaDigital(event)">
+          <div class="info-note" id="form-note">
+            <b>Informasi Akun:</b> Konfirmasi jenis akun (Seller/Buyer) bisa dibicarakan di obrolan WhatsApp.
+          </div>
+
+          <div class="form-box">
+            <label>Paket yang Dipilih</label>
+            <input type="text" id="input-item" readonly style="color: #e2c9a9; border-color: rgba(226, 201, 169, 0.4); background: rgba(0,0,0,0.2); font-weight: 700;">
+          </div>
+          <div class="form-box">
+            <label>Nomor WhatsApp Anda</label>
+            <input type="text" id="input-wa-cust" placeholder="Misal: 08123456789" required>
+          </div>
+
+          <div class="form-box" id="youtube-extra-box" style="display: none;">
+            <label>Tipe Akun YouTube</label>
+            <select id="input-yt-tipe">
+              <option value="Akun Pembeli (Normal)">Akun Pembeli (Harga Normal)</option>
+              <option value="Akun Seller (+Rp5.000)">Akun Seller (+Rp5.000)</option>
+            </select>
+          </div>
+
+          <div class="form-box">
+            <label>Pilihan Pembayaran</label>
+            <select id="input-pay">
+              <option value="QRIS">QRIS All Payment</option>
+              <option value="SeaBank">SeaBank</option>
+              <option value="GoPay">GoPay</option>
+            </select>
+          </div>
+
+          <button type="submit" class="submit-btn" style="width: 100%;">TAMPILKAN NOTA PESANAN</button>
+          <button type="button" class="ask-btn" onclick="tanyaAdminWA()">💬 MASIH BINGUNG? TANYA ADMIN DULU</button>
+        </form>
+      </div>
+
+      <!-- VIEW NOTA (WEB ONLY) -->
+      <div id="view-nota" class="view-panel" style="display: none;">
+        <div class="drawer-header">
+          <button class="nav-btn" onclick="gantiView('view-form')">&#10094;</button>
+          <h3>✦ NOTA DIGITAL</h3>
+          <button class="nav-btn" onclick="tutupSemua()">&times;</button>
+        </div>
+        
+        <div class="receipt-wrapper">
+          <div class="receipt-header">REGARM-MART</div>
+          <div class="receipt-row"><span>Order ID:</span> <span id="nota-id"></span></div>
+          <div class="receipt-row"><span>Status:</span> <span style="color: #10b981;">UNPAID (Pending WA)</span></div>
+          <div class="receipt-row"><span>Waktu:</span> <span id="nota-waktu"></span></div>
+          <div style="margin: 15px 0; border-top: 1px dashed rgba(226,201,169,0.3);"></div>
+          
+          <div class="receipt-row"><span>Aplikasi:</span> <span id="nota-app"></span></div>
+          <div class="receipt-row"><span>Paket/Durasi:</span> <span id="nota-paket"></span></div>
+          <div class="receipt-row" id="nota-row-yt" style="display:none;"><span>Tipe Akun:</span> <span id="nota-yt"></span></div>
+          <div class="receipt-row"><span>Nomor WA Cust:</span> <span id="nota-wa"></span></div>
+          
+          <div class="receipt-total">
+            <span>Metode Bayar:</span> <span id="nota-pay"></span>
+          </div>
+        </div>
+
+        <button onclick="lanjutKeWA()" class="submit-btn" style="width: 100%; display: flex; justify-content: center; gap: 10px;">
+          <span>🟢</span> KONFIRMASI & LANJUT WA
+        </button>
+      </div>
+
+      <!-- VIEW 4: CONTACT PERSON -->
+      <div id="view-contact" class="view-panel" style="display: none;">
+        <div class="drawer-header">
+          <h3>💬 HUBUNGI ADMIN</h3>
+          <button class="nav-btn" onclick="tutupSemua()">&times;</button>
+        </div>
+        <div class="content-list">
+          <a class="action-btn" href="https://wa.me/62895325627342?text=Halo%20Admin,%20saya%20mau%20tanya%20layanan" target="_blank" style="background: rgba(8, 11, 16, 0.5);">
+            <span class="btn-label" style="font-size: 16px;">🟢 WhatsApp Admin Utama</span>
+            <span class="arrow-icon">&#10095;</span>
+          </a>
+          <a class="action-btn" href="https://x.com/klebuss" target="_blank" style="background: rgba(8, 11, 16, 0.5);">
+            <span class="btn-label" style="font-size: 16px;">𝕏 Akun X (Twitter) @klebuss</span>
+            <span class="arrow-icon">&#10095;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- VIEW 5: S&K -->
+      <div id="view-snk" class="view-panel" style="display: none;">
+        <div class="drawer-header">
+          <h3>🛡️ KETENTUAN & KLAIM GARANSI</h3>
+          <button class="nav-btn" onclick="tutupSemua()">&times;</button>
+        </div>
+        
+        <div class="snk-container">
+          <div class="snk-box">
+            <div class="snk-title">✦ KETENTUAN ORDER</div>
+            <div class="snk-text">
+              <p>㈥ Proses 1 - 30 menit, no rush order!!!</p>
+              <p>㈥ This is blackmarket, don't expect too much.</p>
+              <p>㈥ Wajib send form + ss login, tidak kirim garansi hangus.</p>
+              <p>㈥ Garansi max 3x24 jam, bisa 7x24 jam (error massal).</p>
+              <p>㈥ NO REFUND jika bukan kesalahan kami.</p>
+              <p>㈥ Payment first.</p>
+            </div>
+          </div>
+
+          <div class="snk-box" style="position: relative;">
+            <div class="snk-title">✦ KLAIM GARANSI</div>
+            <div class="snk-text">
+              <p style="color: #e2c9a9; text-align: center; margin-bottom: 8px; font-weight: 700;">☆ ✪ FORMAT KLAIM GARANSI ✪</p>
+              <p>ミ Nama aplikasi : </p>
+              <p>ミ Email: </p>
+              <p>ミ Password:</p>
+              <p>ミ ‌Plan: 1u/2u/semi/privat/dll </p>
+              <p>ミ Profil + pin (jika ada):</p>
+              <p>ミ Problem/masalah:</p>
+              <p>ミ ‌Tanggal order: </p>
+              <p>ミ Durasi order: </p>
+              <p>ミ Sisa hari:</p>
+              <br>
+              <p style="color: #e2c9a9; margin-bottom: 4px; font-weight: 700;">Syarat klaim:</p>
+              <p>❖ Tolong double cek akunnya terlebih dahulu sebelum report.</p>
+              <p>❖ Wajib send ss problem.</p>
+              <p>❖ Mohon tunggu sesuai estimasi, dilarang buru-buru atau garansi hangus.</p>
+              <p>❖ Bisa untuk renewal.</p>
+            </div>
+            
+            <button class="copy-btn" onclick="salinFormatGaransi()" style="width: 100%; margin-top: 20px; background: rgba(226, 201, 169, 0.15); border: 1px dashed rgba(226, 201, 169, 0.5); padding: 14px;">
+              📋 SALIN FORMAT KLAIM GARANSI
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 6: INFO APLIKASI -->
+      <div id="view-app-info" class="view-panel" style="display: none;">
+        <div class="drawer-header">
+          <button class="nav-btn" onclick="gantiView('view-paket')">&#10094;</button>
+          <h3 id="title-app-info">INFO APLIKASI</h3>
+          <button class="nav-btn" onclick="tutupSemua()">&times;</button>
+        </div>
+        <div class="snk-box">
+          <div class="snk-text" id="desc-app-info" style="color: #e2e8f0; line-height: 1.8;">
+            Penjelasan detail aplikasi akan muncul di sini.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // --- MENGHILANGKAN SPLASH SCREEN SETELAH LOADING ---
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const splash = document.getElementById('splash-screen');
+        splash.style.opacity = '0';
+        splash.style.visibility = 'hidden';
+      }, 1200);
+    });
+
+    // --- ANIMASI MEMANTUL ---
+    const bgContainer = document.getElementById("bouncing-container");
+    const bounceItems = [];
+    for (let i = 0; i < 8; i++) {
+      let img = document.createElement("img");
+      img.src = "ava.png";
+      img.className = "bounce-img";
+      img.onerror = function() { this.src = "https://api.dicebear.com/7.x/bottts/svg?seed=REGARM"; };
+      bgContainer.appendChild(img);
+      bounceItems.push({ el: img, x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight, vx: (Math.random() - 0.5) * 3.2, vy: (Math.random() - 0.5) * 3.2, rot: 0, vrot: 0 });
+    }
+    const extraIcons = ["🐺", "🎸", "🐺", "⚡", "🎸", "🐺"];
+    extraIcons.forEach(icon => {
+      let span = document.createElement("span"); span.className = "bounce-icon"; span.innerText = icon; bgContainer.appendChild(span);
+      bounceItems.push({ el: span, x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight, vx: (Math.random() - 0.5) * 2.8, vy: (Math.random() - 0.5) * 2.8, rot: Math.random() * 360, vrot: (Math.random() - 0.5) * 1.5 });
+    });
+    const embers = [];
+    for (let i = 0; i < 18; i++) {
+      const ember = document.createElement("div"); ember.className = "ember"; bgContainer.appendChild(ember);
+      embers.push({ el: ember, x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight, vy: -(0.2 + Math.random() * 0.4), phase: Math.random() * 10 });
+    }
+
+    let time = 0;
+    function animate() {
+      time += 0.02;
+      bounceItems.forEach(item => {
+        item.x += item.vx; item.y += item.vy; item.rot += item.vrot;
+        if (item.x <= 0 || item.x >= window.innerWidth - 60) item.vx *= -1;
+        if (item.y <= 0 || item.y >= window.innerHeight - 60) item.vy *= -1;
+        item.el.style.transform = `translate3d(${item.x}px, ${item.y}px, 0) rotate(${item.rot}deg)`;
+      });
+      embers.forEach(em => {
+        em.y += em.vy; em.x += Math.sin(time + em.phase) * 0.25;
+        if (em.y < -10) { em.y = window.innerHeight + 10; em.x = Math.random() * window.innerWidth; }
+        em.el.style.transform = `translate3d(${em.x}px, ${em.y}px, 0)`;
+      });
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+
+    // --- POPUP NOTIFIKASI SALES (FOMO) ---
+    const toastKota = ["Jakarta", "Surabaya", "Bandung", "Medan", "Makassar", "Bali", "Semarang", "Yogyakarta"];
+    const toastProduk = ["Netflix 1 Bulan", "Spotify Famplan", "Canva 1 Tahun", "YouTube Premium", "Capcut Private", "Viu 1 Tahun", "ChatGPT Plus"];
+    
+    function showRandomToast() {
+      const toast = document.getElementById("sales-toast");
+      // Jangan munculkan popup kalau laci menu/modal sedang terbuka
+      if(document.getElementById("drawer-modal").style.display === "flex") return; 
+
+      const randomKota = toastKota[Math.floor(Math.random() * toastKota.length)];
+      const randomProduk = toastProduk[Math.floor(Math.random() * toastProduk.length)];
+      const randomMenit = Math.floor(Math.random() * 5 + 1);
+
+      document.getElementById("toast-buyer").innerText = "Seseorang di " + randomKota;
+      document.getElementById("toast-product").innerText = "Baru saja order " + randomProduk;
+      document.getElementById("toast-time").innerText = randomMenit + " menit yang lalu";
+
+      toast.classList.add("show");
+      setTimeout(() => { toast.classList.remove("show"); }, 4500); // Tampil 4.5 detik
+    }
+
+    // Mulai muncul setelah 3 detik web dibuka, lalu ulangi tiap 15 detik
+    setTimeout(() => {
+      showRandomToast();
+      setInterval(showRandomToast, 15000);
+    }, 3000);
+
+    function toggleFav(event, element) {
+      event.stopPropagation(); element.classList.toggle("active");
+    }
+
+    const NO_WA = "62895325627342";
+    let linkWaFinal = "";
+    let timeStrFinal = "";
+
+    const APP_INFO = {
+      "Netflix": "Layanan streaming yang menyediakan berbagai macam acara TV, film, anime, film dokumenter, dan lainnya.",
+      "Spotify": "Layanan streaming musik digital yang memberimu akses ke jutaan lagu dan podcast tanpa batas.",
+      "DEFAULT": "Penjelasan detail mengenai aplikasi ini sedang dalam proses update. Silakan hubungi admin via WhatsApp untuk informasi lebih lanjut."
+    };
+
+    function bukaInfoAplikasi() {
+      document.getElementById("title-app-info").innerText = "INFO " + pApp.toUpperCase();
+      document.getElementById("desc-app-info").innerText = APP_INFO[pApp] || APP_INFO["DEFAULT"];
+      gantiView("view-app-info");
+    }
+
+    function salinFormatGaransi() {
+      const formatText = `☆ ✪ FORMAT KLAIM GARANSI ✪\nミ Nama aplikasi :\nミ Email:\nミ Password:\nミ ‌Plan:\nミ Profil + pin:\nミ Problem/masalah:\nミ ‌Tanggal order:\nミ Durasi order:\nミ Sisa hari:`;
+      navigator.clipboard.writeText(formatText).then(() => { alert("Format Klaim Garansi berhasil disalin!"); });
+    }
+
+    function tanyaAdminWA() {
+      const formatPesan = `Halo Admin REGARM-MART, saya mau tanya-tanya dulu nih soal produk:\n\n• *${pItem}*\n\n(Tulis pertanyaanmu di sini...)`;
+      const linkWa = `https://wa.me/${NO_WA}?text=${encodeURIComponent(formatPesan)}`;
+      window.open(linkWa, "_blank");
+    }
+
+    const appDomains = {
+      "Netflix": "netflix.com", "YouTube": "youtube.com", "Spotify": "spotify.com", "Disney": "disneyplus.com",
+      "Viu": "viu.com", "iQIYI": "iq.com", "WeTV": "wetv.vip", "HBO Max": "hbomax.com", "Viki": "viki.com",
+      "Vidio Platinum": "vidio.com", "Prime Video": "primevideo.com", "Loklok": "loklok.com", "Youku": "youku.tv",
+      "Bstation": "bilibili.tv", "Apple Music": "music.apple.com", "Canva": "canva.com", "Capcut": "capcut.com",
+      "Picsart": "picsart.com", "Alight Motion": "alightmotionsapps.com", "Figma": "figma.com", "IbisPaint": "ibispaint.com",
+      "Meitu": "meituxiuxiu.com", "Oldroll": "oldroll.id.aptoide.com", "Wink": "wink.ai", "Dazzcam": "dazzcam.org",
+      "ChatGPT": "chatgpt.com", "Claude AI": "claude.ai", "Gemini": "gemini.google.com", "Zoom": "zoom.us",
+      "Grammarly": "grammarly.com", "Quillbot": "quillbot.com", "MS365": "microsoft365.com", "Scribd": "scribd.com",
+      "Kahoot": "kahoot.it", "DeepL": "deepl.com", "iLovePDF": "ilovepdf.com", "Coursera": "coursera.org",
+      "WPS Pro": "wps.com", "Quizizz": "quizizz.com", "Duolingo": "duolingo.com", "Academia": "academia.edu", "HMA VPN": "hidemyass.com"
+    };
+
+    function getLogoUrl(appName) { return `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${appDomains[appName] || "google.com"}&size=64`; }
+
+    // --- DATABASE PAKET & CARA MENAMBAH TAG [HOT] MANUAL ---
+    // Tambahkan kata [HOT] pada nama durasi paket yang kamu inginkan. 
+    // Contoh di bawah ini ada pada "Netflix" dan "Canva".
+    const DATABASE = {
+      "Streaming & Music": {
+        "Netflix": ["Single Screen 1 Bulan [HOT] - Rp65.000", "1P1U 1 Hari - Rp5.000", "1P1U 3 Hari - Rp12.000", "1P1U 5 Hari - Rp15.000", "1P1U 7 Hari - Rp18.000", "1P1U 1 Bulan - Rp45.000", "1P1U 2 Bulan - Rp88.000", "1P1U 3 Bulan - Rp115.000", "1P2U 1 Bulan - Rp30.000", "1P2U 2 Bulan - Rp55.000", "1P2U 3 Bulan - Rp65.000", "Semi Private 1 Bulan - Rp55.000", "Anti Limit (4U) 1 Bulan - Rp60.000", "Private 1 Bulan - Rp180.000"],
+        "YouTube": ["Famplan 1 Bulan - Rp10.000", "Famplan 2 Bulan - Rp15.000", "Famplan 3 Bulan - Rp20.000", "Famplan 4 Bulan - Rp30.000", "Indplan 1 Bulan - Rp25.000", "Mixplan 1 Bulan - Rp30.000", "Mixplan 3 Bulan - Rp30.000", "Mixplan 4 Bulan - Rp35.000", "Mixplan 5 Bulan - Rp47.000", "Mixplan 6 Bulan - Rp50.000"],
+        "Spotify": ["Famplan 1 Bulan - Rp30.000", "Famplan 2 Bulan - Rp55.000", "Famplan 3 Bulan - Rp65.000", "Indplan 1 Bulan - Rp35.000", "Indplan 2 Bulan - Rp60.000", "Indplan 3 Bulan - Rp75.000"],
+        "Disney": ["Sharing/Anlim 1 Hari - Rp4.000 / Rp7.000", "Sharing/Anlim 3 Hari - Rp8.000 / Rp12.000", "Sharing/Anlim 5 Hari - Rp10.000 / Rp15.000", "Sharing/Anlim 7 Hari - Rp15.000 / Rp20.000", "Premium 1 Bulan 3U - Rp55.000", "Premium 1 Bulan 4U - Rp45.000", "Premium 1 Bulan 5U - Rp40.000", "Premium 1 Bulan 6U - Rp32.000", "Premium 1 Bulan 10U - Rp25.000", "Premium Private 1 Bulan - Rp130.000"],
+        "Viu": ["Private Anlim/Biasa 1 Hari - Rp4.000 / Rp2.500", "Private Anlim/Biasa 3 Hari - Rp6.000 / Rp4.500", "Private Anlim/Biasa 7 Hari - Rp8.000 / Rp7.000", "Private Anlim/Biasa 1 Bulan - Rp15.000 / Rp10.000", "Private Anlim/Biasa 3 Bulan - Rp20.000 / Rp15.000", "Private Anlim/Biasa 6 Bulan - Rp25.000 / Rp20.000", "Private Anlim/Biasa 1 Tahun - Rp30.000 / Rp25.000"],
+        "iQIYI": ["Sharing 1 Hari - Rp3.000", "Sharing 3 Hari - Rp7.000", "Sharing 7 Hari - Rp10.000", "Sharing 1 Bulan - Rp15.000", "Sharing 3 Bulan - Rp25.000", "Sharing 1 Tahun - Rp30.000", "Antilimit 1 Bulan - Rp25.000", "Private 1 Bulan - Rp35.000"],
+        "WeTV": ["Sharing 1 Hari - Rp4.000", "Sharing 3 Hari - Rp7.000", "Sharing 7 Hari - Rp10.000", "Sharing 1 Bulan - Rp15.000", "Sharing 3 Bulan - Rp30.000", "Sharing Anlim 1 Bulan - Rp25.000", "Private 1 Bulan - Rp40.000"],
+        "HBO Max": ["Sharing Std/Ulti 5 Hari - Rp12.000 / Rp14.000", "Sharing Std/Ulti 7 Hari - Rp15.000 / Rp18.000", "Sharing Std/Ulti 1 Bulan - Rp25.000 / Rp30.000", "Sharing Std/Ulti 2 Bulan - Rp40.000 / Rp50.000", "Sharing Std/Ulti 3 Bulan - Rp50.000 / Rp70.000", "Private Std/Ulti 1 Bulan - Rp90.000 / Rp110.000"],
+        "Viki": ["Sharing Standar 1 Bulan - Rp18.000", "Sharing Standar 1 Tahun - Rp30.000", "Sharing Plus 1 Bulan - Rp20.000", "Private 1 Bulan Standar - Rp30.000", "Private 1 Bulan Plus - Rp35.000"],
+        "Vidio Platinum": ["Private Mobile 1 Hari - Rp10.000", "Private Mobile 3 Hari - Rp15.000", "Private Mobile 7 Hari - Rp20.000", "Private Mobile 1 Bulan - Rp35.000", "Private Alldev 1 Hari - Rp12.000", "Private Alldev 3 Hari - Rp20.000", "Private Alldev 7 Hari - Rp28.000", "Private Alldev 1 Bulan - Rp55.000", "Private Plat Extra Mobile 1 Bulan - Rp85.000", "Alldev 1 Bulan - Rp95.000", "Private Ultimate Mobile 1 Bulan - Rp125.000", "Private Ultimate Alldev 1 Bulan - Rp190.000"],
+        "Prime Video": ["Sharing 1 Hari - Rp3.000", "Sharing 3 Hari - Rp6.000", "Sharing 7 Hari - Rp8.000", "Sharing 1 Bulan 4U - Rp10.000", "Sharing 1 Bulan 3U - Rp15.000", "Private 1 Bulan - Rp25.000"],
+        "Loklok": ["Sharing Basic 1 Hari - Rp5.000", "Sharing Basic 3 Hari - Rp10.000", "Sharing Basic 7 Hari - Rp15.000", "Sharing Basic 1 Bulan (No TV) - Rp25.000", "Sharing Standar 1 Hari - Rp6.000", "Sharing Standar 3 Hari - Rp12.000", "Sharing Standar 7 Hari - Rp17.000", "Sharing Standar 1 Bulan (Bisa TV) - Rp30.000", "Private Basic 1 Bulan - Rp65.000", "Private Standar 1 Bulan - Rp85.000"],
+        "Youku": ["Sharing 1 Bulan - Rp15.000", "Sharing 3 Bulan - Rp20.000", "Sharing 1 Tahun - Rp25.000", "Private 1 Bulan - Rp40.000"],
+        "Bstation": ["Sharing 1 Hari - Rp3.000", "Sharing 3 Hari - Rp6.000", "Sharing 7 Hari - Rp9.000", "Sharing 1 Bulan - Rp15.000", "Sharing 3 Bulan - Rp20.000", "Sharing 1 Tahun - Rp35.000", "Private 1 Bulan - Rp40.000"],
+        "Apple Music": ["Imess No Renew 1 Bulan - Rp15.000", "Imess No Renew 2 Bulan - Rp25.000", "Imess No Renew 3 Bulan - Rp35.000", "Imess No Renew 4 Bulan - Rp40.000"]
+      },
+      "Editing": {
+        "Canva": ["Designer 1 Hari - Rp2.000", "Designer 3 Hari - Rp4.000", "Designer 7 Hari - Rp5.000", "Designer 1 Bulan - Rp10.000", "Designer 2 Bulan - Rp15.000", "Designer 3 Bulan - Rp20.000", "Designer 6 Bulan - Rp25.000", "Designer 1 Tahun - Rp30.000", "Lifetime Edu (Fullgar) [HOT] - Rp35.000"],
+        "Capcut": ["Sharing 2U 3 Hari - Rp7.000", "Sharing 2U 7 Hari - Rp15.000", "Sharing 2U 1 Bulan - Rp30.000", "Private 3 Hari - Rp12.000", "Private 7 Hari - Rp25.000", "Private 1 Bulan (Fullgar) - Rp55.000"],
+        "Picsart": ["Sharing 1 Bulan - Rp12.000", "Sharing 2 Bulan - Rp15.000", "Sharing 3 Bulan - Rp20.000", "Sharing 6 Bulan - Rp35.000", "Private 1 Hari - Rp4.000", "Private 3 Hari - Rp5.000", "Private 7 Hari - Rp10.000", "Private 1 Bulan - Rp25.000"],
+        "Alight Motion": ["Sharing 1 Bulan - Rp10.000", "Sharing 1 Tahun - Rp20.000", "Private 1 Bulan - Rp15.000", "Private 1 Tahun - Rp25.000"],
+        "Figma": ["Private 1 Bulan - Rp55.000"],
+        "IbisPaint": ["Sharing 5 Hari - Rp10.000", "Sharing 7 Hari - Rp15.000", "Sharing 1 Bulan - Rp20.000", "Sharing 1 Tahun - Rp30.000"],
+        "Meitu": ["Private VIP 7 Hari - Rp15.000", "Private VIP 1 Bulan - Rp45.000", "Private VIP+ 7 Hari - Rp20.000", "Private VIP+ 1 Bulan - Rp55.000"],
+        "Oldroll": ["Sharing 3 Hari - Rp6.000", "Sharing 5 Hari - Rp7.000", "Sharing 7 Hari - Rp8.000", "Sharing 1 Bulan - Rp10.000", "Sharing 3 Bulan - Rp13.000", "Sharing 6 Bulan - Rp15.000", "Lifetime (Garansi 1 Tahun) - Rp30.000"],
+        "Wink": ["Private 7 Hari (No Refund) - Rp20.000"],
+        "Dazzcam": ["Lifetime Garansi 6B - Rp25.000"]
+      },
+      "Education": {
+        "ChatGPT": ["Go Sharing 5U 1 Hari - Rp7.000", "Go Sharing 5U 3 Hari - Rp12.000", "Go Sharing 5U 7 Hari - Rp22.000", "Go Sharing 5U 1 Bulan - Rp35.000", "Go Private 1 Bulan - Rp85.000", "Sharing Plus 1 Hari - Rp12.000", "Sharing Plus 3 Hari - Rp20.000", "Sharing Plus 7 Hari - Rp30.000", "Sharing Plus 1 Bulan - Rp60.000"],
+        "Claude AI": ["3U 1 Hari - Rp30.000", "3U 3 Hari - Rp50.000", "3U 5 Hari - Rp65.000", "3U 7 Hari - Rp70.000", "3U 1 Bulan - Rp185.000", "2U 1 Hari - Rp40.000", "2U 3 Hari - Rp65.000", "2U 5 Hari - Rp80.000", "2U 7 Hari - Rp95.000", "Private 1 Hari - Rp45.000", "Private 3 Hari - Rp85.000", "Private 5 Hari - Rp115.000", "Private 7 Hari - Rp180.000"],
+        "Gemini": ["Private/Famplan 1 Bulan - Rp25.000", "Private/Famplan 2 Bulan - Rp35.000", "Private/Famplan 3 Bulan - Rp45.000", "Private/Famplan 4 Bulan - Rp55.000", "Private/Famplan 5 Bulan - Rp65.000", "Private/Famplan 6 Bulan - Rp75.000", "Private/Famplan 1 Tahun - Rp85.000"],
+        "Zoom": ["100P 1 Jam - Rp4.000", "100P 2 Jam - Rp6.000", "100P 3 Jam - Rp10.000", "100P 1 Hari - Rp13.000", "100P 2 Hari - Rp15.000", "100P 3 Hari - Rp20.000", "100P 7 Hari - Rp25.000", "100P 1 Bulan - Rp60.000", "100P 2 Bulan - Rp75.000", "100P 3 Bulan - Rp90.000", "300P 1 Jam - Rp15.000", "300P 1 Hari - Rp40.000", "300P 1 Bulan - Rp180.000", "500P 1 Jam - Rp30.000", "500P 1 Hari - Rp70.000", "500P 1 Bulan - Rp355.000"],
+        "Grammarly": ["Sharing 3 Hari - Rp6.000", "Sharing 1 Bulan - Rp15.000", "Sharing 3 Bulan - Rp32.000", "Private 1 Bulan - Rp45.000", "Private 2 Bulan - Rp65.000"],
+        "Quillbot": ["Sharing 3 Hari - Rp8.000", "Sharing 1 Bulan - Rp20.000", "Sharing 3 Bulan - Rp45.000", "Private 1 Bulan - Rp50.000", "Private 3 Bulan - Rp80.000"],
+        "MS365": ["Member (Famplan) 7 Hari - Rp10.000", "Member (Famplan) 1 Bulan - Rp15.000", "Member (Famplan) 2 Bulan - Rp20.000", "Member (Famplan) 3 Bulan - Rp25.000", "Member (Famplan) 4 Bulan - Rp35.000", "Member (Famplan) 5 Bulan - Rp40.000", "Member (Famplan) 6 Bulan - Rp50.000", "Member (Famplan) 1 Tahun - Rp70.000"],
+        "Scribd": ["Sharing 1 Bulan - Rp12.000", "Sharing 2 Bulan - Rp15.000", "Private 1 Bulan - Rp20.000", "Private 2 Bulan - Rp25.000"],
+        "Kahoot": ["Private 200P 3 Hari - Rp10.000", "Private 200P 5 Hari - Rp15.000", "Private 7 Hari - Rp20.000", "Private 200P 1 Bulan - Rp45.000", "Private 400P 3 Hari - Rp15.000", "Private 2000P 3 Hari - Rp25.000", "Private 2000P - Rp40.000"],
+        "DeepL": ["Private Fullgar 7 Hari - Rp25.000", "Private Fullgar 1 Bulan - Rp45.000", "Translate File 1 File - Rp8.000", "Sharing 3U 1 Bulan - Rp30.000"],
+        "iLovePDF": ["Sharing 1 Bulan - Rp15.000", "Sharing 1 Tahun - Rp30.000", "Private 1 Bulan - Rp25.000", "Private 3 Bulan - Rp45.000"],
+        "Coursera": ["Private 7 Hari - Rp10.000", "Private 1 Bulan - Rp25.000", "Private 2 Bulan - Rp40.000", "Private 3 Bulan - Rp50.000", "Private 6 Bulan - Rp65.000", "Private 1 Tahun - Rp120.000"],
+        "WPS Pro": ["Sharing 1 Bulan - Rp15.000", "Sharing 3 Bulan - Rp20.000", "Private 1 Bulan - Rp35.000", "Private 6 Bulan - Rp65.000"],
+        "Quizizz": ["Private 1 Bulan - Rp25.000", "Private 3 Bulan - Rp42.000", "Private 1 Tahun - Rp87.000"],
+        "Duolingo": ["Famplan 3 Hari - Rp5.000", "Famplan 1 Bulan - Rp20.000", "Famplan 3 Bulan - Rp35.000"],
+        "Academia": ["Sharing 7 Hari - Rp9.000", "Sharing 1 Bulan - Rp17.000", "Sharing 3 Bulan - Rp25.000", "Sharing 1 Tahun - Rp35.000", "Private 1 Bulan - Rp40.000"]
+      },
+      "Other": {
+        "HMA VPN": ["Sharing 7 Hari - Rp8.000", "Sharing 14 Hari - Rp10.000", "Sharing 1 Bulan - Rp15.000", "Private 7 Hari - Rp10.000", "Private 14 Hari - Rp15.000", "Private 1 Bulan - Rp25.000"]
+      }
+    };
+
+    let pKategoriApp = "", pApp = "", pItem = "", pNamaPaket = "", pHarga = "";
+    let activeFilterKat = "Semua";
+
+    function gantiView(viewId) { document.querySelectorAll(".view-panel").forEach(v => v.style.display = "none"); document.getElementById(viewId).style.display = "block"; }
+    function tutupSemua() { document.getElementById("drawer-modal").style.display = "none"; }
+    function tutupLuar(e) { if (e.target.id === "drawer-modal") tutupSemua(); }
+    function bukaKontak() { document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-contact"); }
+    function bukaSnK() { document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-snk"); }
+    function bukaKatalogUtama() { document.getElementById("drawer-modal").style.display = "flex"; gantiView("view-pricelist-utama"); renderAplikasi(""); }
+
+    function setKategori(kat, btn) {
+      activeFilterKat = kat; document.querySelectorAll(".chip").forEach(c => c.classList.remove("active")); btn.classList.add("active"); renderAplikasi(document.getElementById("search-app").value);
+    }
+    function filterAplikasi() { renderAplikasi(document.getElementById("search-app").value); }
+
+    function renderAplikasi(queryText) {
+      const box = document.getElementById("box-all-apps"); box.innerHTML = ""; const query = queryText.toLowerCase();
+      for (const [katName, apps] of Object.entries(DATABASE)) {
+        if (activeFilterKat !== "Semua" && activeFilterKat !== katName) continue;
+        for (const appName of Object.keys(apps)) {
+          if (appName.toLowerCase().includes(query)) {
+            const row = document.createElement("div"); row.className = "product-item";
+            row.innerHTML = `<div class="item-left"><img class="app-logo" src="${getLogoUrl(appName)}" onerror="this.src='https://api.dicebear.com/7.x/identicon/svg?seed=${appName}'"><span style="font-size: 16px;">${appName}</span></div><span class="arrow-icon">&#10095;</span>`;
+            row.onclick = () => { pKategoriApp = katName; pilihPaket(appName); }; box.appendChild(row);
+          }
+        }
+      }
+    }
+
+    function pilihPaket(appName) {
+      pApp = appName; document.getElementById("label-aplikasi").innerText = appName.toUpperCase();
+      const box = document.getElementById("daftar-paket-box"); box.innerHTML = "";
+      
+      const pakets = DATABASE[pKategoriApp][appName] || [];
+
+      pakets.forEach((pktStr) => {
+        const parts = pktStr.split(" - ");
+        let namaAsli = parts[0];
+        let harga = parts.length > 1 ? parts[1] : "";
+        let showHot = false;
+        
+        // Logika Auto HOT Dihapus. Sekarang murni baca tulisan [HOT] manual dari database
+        if (namaAsli.includes("[HOT]")) {
+          showHot = true;
+          namaAsli = namaAsli.replace("[HOT]", "").trim();
+        }
+
+        const row = document.createElement("div"); row.className = "product-item";
+        row.innerHTML = `<div class="item-left"><span class="fav-icon" onclick="toggleFav(event, this)" title="Tandai Favorit">🐺</span><span>${namaAsli} ${showHot ? '<span class="hot-label">🔥 BEST</span>' : ''}</span></div><span class="prod-price">${harga}</span>`;
+        row.onclick = () => siapkanForm(appName, namaAsli, harga); box.appendChild(row);
+      });
+      gantiView("view-paket");
+    }
+
+    function siapkanForm(appName, namaPaket, harga) {
+      pItem = `${appName} - ${namaPaket} (${harga})`;
+      pNamaPaket = namaPaket; pHarga = harga;
+      document.getElementById("input-item").value = pItem;
+      if (appName === "YouTube") { document.getElementById("youtube-extra-box").style.display = "block"; } else { document.getElementById("youtube-extra-box").style.display = "none"; }
+      gantiView("view-form");
+    }
+
+    function bukaNotaDigital(e) {
+      e.preventDefault();
+      const waCust = document.getElementById("input-wa-cust").value;
+      const pay = document.getElementById("input-pay").value;
+      
+      const orderId = "ORD-" + Math.random().toString(36).substring(2, 6).toUpperCase() + Math.floor(Math.random() * 99);
+      const now = new Date();
+      timeStrFinal = now.toLocaleDateString('id-ID') + " " + now.toLocaleTimeString('id-ID').substring(0,5);
+
+      document.getElementById("nota-id").innerText = orderId;
+      document.getElementById("nota-waktu").innerText = timeStrFinal;
+      document.getElementById("nota-app").innerText = pApp;
+      document.getElementById("nota-paket").innerText = pNamaPaket;
+      document.getElementById("nota-wa").innerText = waCust;
+      document.getElementById("nota-pay").innerText = pay;
+
+      let ytNote = "";
+      if (pApp === "YouTube") {
+        const ytTipe = document.getElementById("input-yt-tipe").value;
+        document.getElementById("nota-row-yt").style.display = "flex";
+        document.getElementById("nota-yt").innerText = ytTipe;
+        ytNote = `\n• Tipe Akun YT: ${ytTipe}`;
+      } else {
+        document.getElementById("nota-row-yt").style.display = "none";
+      }
+
+      // FORMAT WA FINAL (Sudah Menyertakan Emoji Kertas 📝 dan Jam Order ⏰)
+      const formatPesan = `Halo Admin REGARM-MART, saya mau konfirmasi pesanan!\n\n*📝 NOTA PESANAN | ${orderId}*\n*⏰ Waktu Order:* ${timeStrFinal}\n----------------------------------\n• Produk: ${pApp} - ${pNamaPaket}\n• Harga: ${pHarga} ${ytNote}\n• No. WhatsApp: ${waCust}\n• Pembayaran via: ${pay}\n----------------------------------\nSegera diproses ya min, terima kasih! ⚡`;
+      linkWaFinal = `https://wa.me/${NO_WA}?text=${encodeURIComponent(formatPesan)}`;
+
+      gantiView("view-nota");
+    }
+
+    function lanjutKeWA() { if (linkWaFinal !== "") { window.open(linkWaFinal, "_blank"); } }
+  </script>
+</body>
+</html>
