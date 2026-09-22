@@ -261,7 +261,7 @@
     .store-subtitle { font-size: 13px; font-weight: 600; color: #94a3b8; margin-top: 4px; letter-spacing: 4px; }
     .store-bio { font-size: 13px; color: var(--text-color); opacity: 0.9; margin: 12px 0 14px; font-style: italic; font-weight: 300; max-width: 420px; line-height: 1.5; }
 
-    /* BADGE STATUS OPERASIONAL */
+    /* BADGE STATUS OPERASIONAL (BISA DIKLIK) */
     .store-badge {
       display: inline-flex;
       align-items: center;
@@ -275,6 +275,12 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .store-badge:hover {
+      border-color: var(--accent-color);
+      transform: scale(1.03);
     }
 
     .stats-bar {
@@ -426,7 +432,7 @@
     }
     .back-to-top:hover { transform: scale(1.1); background: var(--accent-color); color: #0b0e14; }
 
-    /* --- FLOATING CHAT MENU (DI KANAN BAWAH) --- */
+    /* --- FLOATING CHAT MENU --- */
     .float-chat-container {
       position: fixed;
       bottom: 25px;
@@ -483,7 +489,7 @@
     .sub-chat-tele { background: #0088cc; }
     .sub-chat-item svg { width: 24px; height: 24px; fill: #ffffff; }
 
-    /* --- CUSTOM TOAST NOTIFICATION (NO. 3) --- */
+    /* --- CUSTOM TOAST NOTIFICATION --- */
     #custom-toast {
       position: fixed;
       top: 30px;
@@ -711,7 +717,7 @@
 </head>
 <body>
 
-  <!-- CUSTOM TOAST NOTIFICATION (NO. 3) -->
+  <!-- CUSTOM TOAST NOTIFICATION -->
   <div id="custom-toast">✅ Berhasil disalin ke clipboard!</div>
 
   <!-- POJOK KANAN ATAS (TOMBOL INFO TOKO & MODE GELAP/TERANG) -->
@@ -748,8 +754,8 @@
       <div class="store-subtitle" id="dynamic-greeting">PREMIUM APPS</div>
       <p class="store-bio">"your one-stop premium store. tap menu di bawah untuk order"</p>
       
-      <!-- BADGE STATUS -->
-      <div class="store-badge">
+      <!-- BADGE STATUS OPERASIONAL (BISA DIKLIK UTK INFO JAM BUKA) -->
+      <div class="store-badge" onclick="vibratePhone(); bukaJamOperasional()" title="Klik untuk lihat jadwal operasional">
         <span id="badge-status-icon">🟢</span>
         <span id="badge-status-text" style="color: var(--accent-color);">Memeriksa status toko...</span>
       </div>
@@ -825,7 +831,7 @@
   <!-- TOMBOL KEMBALI KE ATAS -->
   <button class="back-to-top" id="backToTopBtn" onclick="scrollToTop()" title="Kembali ke atas">▲</button>
 
-  <!-- FLOATING CHAT MENU (WA & TELEGRAM DIGABUNG DI POJOK KANAN BAWAH) -->
+  <!-- FLOATING CHAT MENU (WA & TELEGRAM) -->
   <div class="float-chat-container">
     <div class="main-chat-btn" onclick="toggleChatMenu()" title="Hubungi Admin">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.59 1.38 5.11L2 22l5.05-1.34C8.55 21.49 10.24 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.47 0-2.85-.39-4.04-1.07l-.29-.17-3.03.81.81-2.95-.18-.3C4.39 14.85 4 13.47 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.33-5.59c-.23-.12-1.37-.68-1.58-.76-.21-.08-.36-.12-.51.12-.15.24-.59.76-.72.92-.13.16-.27.18-.5.06-.23-.12-.97-.36-1.85-1.14-.68-.61-1.14-1.36-1.28-1.59-.14-.23-.01-.35.1-.47.1-.1.23-.27.35-.41.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.51-1.23-.7-1.68-.19-.44-.38-.38-.51-.39l-.43-.01c-.15 0-.39.06-.59.27-.2.21-.77.75-.77 1.83s.79 2.12.9 2.27c.11.15 1.55 2.37 3.76 3.32.53.23.94.37 1.26.47.53.17 1.01.15 1.39.09.43-.07 1.37-.56 1.56-1.1.19-.54.19-1 .13-1.1-.06-.1-.22-.16-.45-.28z"/></svg>
@@ -990,6 +996,22 @@
         </div>
       </div>
 
+      <!-- VIEW JAM OPERASIONAL (FITUR BARU NO. 5) -->
+      <div id="view-jam- operasional" class="view-panel" style="display: none;">
+        <div class="drawer-header">
+          <h3>⏰ JADWAL OPERASIONAL</h3>
+          <button class="nav-btn" onclick="tutupSemua()">&times;</button>
+        </div>
+        <div class="snk-box">
+          <div class="snk-title">✦ JAM LAYANAN TOKO</div>
+          <div class="snk-text" style="text-align: center;">
+            <p style="font-size: 15px; color: var(--accent-color); font-weight: 700; margin-bottom: 10px;">🟢 Buka Setiap Hari</p>
+            <p style="font-size: 16px; font-weight: 800; margin-bottom: 15px;">Pukul 10.00 – 00.30 WIB</p>
+            <p style="opacity: 0.8; line-height: 1.6;">Diluar jam tersebut, chat WhatsApp atau Telegram tetap bisa dikirim dan akan diproses secara berurutan saat toko buka kembali. Terima kasih atas pengertiannya! ⚡</p>
+          </div>
+        </div>
+      </div>
+
       <!-- VIEW CONTACT -->
       <div id="view-contact" class="view-panel" style="display: none;">
         <div class="drawer-header">
@@ -1110,7 +1132,7 @@
   </div>
 
   <script>
-    // --- CUSTOM TOAST NOTIFICATION (NO. 3) ---
+    // --- CUSTOM TOAST NOTIFICATION ---
     function showToast(message) {
       const toast = document.getElementById("custom-toast");
       toast.innerText = message;
@@ -1132,7 +1154,7 @@
       menu.classList.toggle("active");
     }
 
-    // --- SAPAAN WAKTU OTOMATIS (No. 10) ---
+    // --- SAPAAN WAKTU OTOMATIS ---
     window.addEventListener('DOMContentLoaded', () => {
       const hour = new Date().getHours();
       let greeting = "PREMIUM APPS";
@@ -1145,7 +1167,7 @@
       if(sub) sub.innerText = greeting;
     });
 
-    // --- BACK TO TOP SCROLL (No. 9) ---
+    // --- BACK TO TOP SCROLL ---
     const backToTopBtn = document.getElementById("backToTopBtn");
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
@@ -1179,7 +1201,7 @@
       document.getElementById("theme-btn").innerText = "☀️";
     }
 
-    // --- QUICK COPY & SHARE API (DENGAN CUSTOM TOAST) ---
+    // --- QUICK COPY & SHARE API ---
     function salinInfoBayar() {
       vibratePhone();
       const textToCopy = `Order ID: ${document.getElementById("nota-id").innerText}\nProduk: ${pApp} - ${pNamaPaket}\nHarga: ${pHarga}\nMetode Bayar: ${document.getElementById("nota-pay").innerText}`;
@@ -1278,7 +1300,7 @@
     }
     requestAnimationFrame(animate);
 
-    // --- JAM OPERASIONAL ---
+    // --- JAM OPERASIONAL & POP-UP JADWAL ---
     function checkJamOperasional() {
       const wibStr = new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta" });
       const wibDate = new Date(wibStr);
@@ -1311,6 +1333,11 @@
     }
     checkJamOperasional();
     setInterval(checkJamOperasional, 30000);
+
+    function bukaJamOperasional() {
+      document.getElementById("drawer-modal").style.display = "flex";
+      gantiView("view-jam-operasional");
+    }
 
     // --- TOAST FOMO ---
     const toastKota = ["Jakarta", "Surabaya", "Bandung", "Medan", "Makassar", "Bali", "Semarang", "Yogyakarta", "Kalimantan", "Sumatera", "Sulawesi", "Bekasi", "Depok", "Papua", "Lombok", "Malaysia", "Singapore"];
